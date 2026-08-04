@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8: Bootstrap Helpers Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #d63384; /* Pink for Module 8 */
+            --theme-hover: #a62666;
+            --theme-light: #f8d7da;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-color);
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-hover);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Module 8: Helpers</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#clearfix">1. Clearfix</a>
+            <a class="nav-link" href="#colored-links">2. Colored Links</a>
+            <a class="nav-link" href="#ratio">3. Ratio</a>
+            <a class="nav-link" href="#position-helpers">4. Position Helpers</a>
+            <a class="nav-link" href="#stretched-link">5. Stretched Link</a>
+            <a class="nav-link" href="#text-truncation">6. Text Truncation</a>
+            <a class="nav-link" href="#vertical-rule">7. Vertical Rule</a>
+            
+            <h6 class="px-3 mt-4 mb-2 text-muted text-uppercase" style="font-size:0.8rem">Assessments</h6>
+            <a class="nav-link" href="#interview">8. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">9. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">10. Short Answers</a>
+            <a class="nav-link" href="#exercises">11. Coding Exercises</a>
+            <a class="nav-link" href="#projects">12. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Helpers</h1>
+            <p class="lead text-muted mb-5">Specialized helper classes that solve common layout and styling problems quickly without custom CSS.</p>
+
+            <!-- 1. CLEARFIX -->
+            <section id="clearfix">
+                <h2 class="custom-heading">1. Clearfix</h2>
+                <p>Easily clear floats by adding <code>.clearfix</code> to the parent element. This prevents the parent container from collapsing to zero height when its children are floated.</p>
+                
+                <div class="demo-container">
+                    <div class="bg-info clearfix p-3 rounded">
+                        <button type="button" class="btn btn-secondary float-start">Floated button start</button>
+                        <button type="button" class="btn btn-secondary float-end">Floated button end</button>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="clearfix bg-info"&gt;
+  &lt;button class="float-start"&gt;Left&lt;/button&gt;
+  &lt;button class="float-end"&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 2. COLORED LINKS -->
+            <section id="colored-links">
+                <h2 class="custom-heading">2. Colored Links</h2>
+                <p>Colored link helpers modify the color of links, providing hover states that regular text color utilities (like <code>.text-primary</code>) do not automatically include.</p>
+                
+                <div class="demo-container">
+                    <a href="#" class="link-primary">Primary link</a><br>
+                    <a href="#" class="link-secondary">Secondary link</a><br>
+                    <a href="#" class="link-success">Success link</a><br>
+                    <a href="#" class="link-danger">Danger link</a><br>
+                    <a href="#" class="link-warning">Warning link</a><br>
+                    <a href="#" class="link-info">Info link</a><br>
+                    <a href="#" class="link-dark">Dark link</a>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Notice it is link-* instead of text-* --&gt;
+&lt;a href="#" class="link-primary"&gt;Primary link&lt;/a&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3. RATIO -->
+            <section id="ratio">
+                <h2 class="custom-heading">3. Ratio</h2>
+                <p>Use ratio helpers to manage the aspect ratios of external content like `&lt;iframe&gt;`, `&lt;embed&gt;`, `&lt;video&gt;`, and `&lt;object&gt;`. They can also be used on standard `&lt;div&gt;` elements.</p>
+                
+                <div class="demo-container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>16x9 Aspect Ratio</h5>
+                            <div class="ratio ratio-16x9 bg-secondary text-white d-flex align-items-center justify-content-center">
+                                <div>Responsive 16:9 Box</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>1x1 Aspect Ratio</h5>
+                            <div class="ratio ratio-1x1 bg-dark text-white d-flex align-items-center justify-content-center w-50">
+                                <div>Perfect Square</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="ratio ratio-16x9"&gt;
+  &lt;iframe src="https://www.youtube.com/embed/..." title="YouTube video" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 4. POSITION HELPERS -->
+            <section id="position-helpers">
+                <h2 class="custom-heading">4. Position Helpers</h2>
+                <p>Use these helpers to quickly fix elements to the top or bottom of the viewport, or make them sticky.</p>
+                
+                <div class="explanation">
+                    <ul>
+                        <li><code>.fixed-top</code>: Pins element to the top of the viewport.</li>
+                        <li><code>.fixed-bottom</code>: Pins element to the bottom of the viewport.</li>
+                        <li><code>.sticky-top</code>: Sticks element to the top of the viewport only after scrolling past it.</li>
+                    </ul>
+                </div>
+                
+                <div class="demo-container">
+                    <p class="text-muted"><em>(Cannot safely demo fixed elements inline without breaking this page layout, but here is the code implementation)</em></p>
+                </div>
+
+<pre><code class="language-html">&lt;nav class="navbar fixed-top bg-light"&gt;
+  I am always at the top of the screen!
+&lt;/nav&gt;
+
+&lt;div class="sticky-top bg-warning"&gt;
+  I scroll normally until I hit the top, then I stick!
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- 5. STRETCHED LINK -->
+            <section id="stretched-link">
+                <h2 class="custom-heading">5. Stretched Link</h2>
+                <p>Add <code>.stretched-link</code> to a link to make its containing block clickable via a `::after` pseudo-element. The containing block must have <code>position: relative</code>.</p>
+                
+                <div class="demo-container">
+                    <div class="card position-relative" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Card with Stretched Link</h5>
+                            <p class="card-text">Click anywhere in this entire card box, and it will trigger the link below!</p>
+                            <a href="#" class="btn btn-primary stretched-link" onclick="alert('You clicked the card!')">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+<pre><code class="language-html">&lt;!-- Parent MUST have position-relative --&gt;
+&lt;div class="card position-relative"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5&gt;Title&lt;/h5&gt;
+    &lt;p&gt;Content...&lt;/p&gt;
+    &lt;!-- This link expands to cover the whole card --&gt;
+    &lt;a href="#" class="stretched-link"&gt;Click me&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- 6. TEXT TRUNCATION -->
+            <section id="text-truncation">
+                <h2 class="custom-heading">6. Text Truncation</h2>
+                <p>Truncate long strings of text with an ellipsis using <code>.text-truncate</code>. <strong>Note:</strong> It requires the element to be `display: inline-block` or `display: block`.</p>
+                
+                <div class="demo-container">
+                    <!-- Block level -->
+                    <div class="row">
+                        <div class="col-4 text-truncate border bg-light p-2" title="This is a very long string of text that will be truncated.">
+                            This is a very long string of text that will be truncated because it is too long to fit in this 4-column layout.
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <!-- Inline block -->
+                    <span class="d-inline-block text-truncate border bg-light p-2" style="max-width: 150px;">
+                        This text will also truncate.
+                    </span>
+                </div>
+
+<pre><code class="language-html">&lt;div class="text-truncate" style="max-width: 200px;"&gt;
+  This very long text will be cut off with an ellipsis...
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- 7. VERTICAL RULE -->
+            <section id="vertical-rule">
+                <h2 class="custom-heading">7. Vertical Rule (vr)</h2>
+                <p>Use the <code>.vr</code> class to create a vertical divider. It scales with the height of its parent and is commonly used in flexbox layouts.</p>
+                
+                <div class="demo-container">
+                    <div class="d-flex bg-light p-3 border rounded">
+                        <div class="p-2">Item 1</div>
+                        <div class="vr mx-3"></div>
+                        <div class="p-2">Item 2</div>
+                        <div class="vr mx-3"></div>
+                        <div class="p-2">Item 3</div>
+                    </div>
+                </div>
+
+<pre><code class="language-html">&lt;div class="d-flex"&gt;
+  &lt;div&gt;First item&lt;/div&gt;
+  &lt;!-- Vertical rule with margin --&gt;
+  &lt;div class="vr mx-2"&gt;&lt;/div&gt;
+  &lt;div&gt;Second item&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- SECTION 8: INTERVIEWS -->
+            <section id="interview">
+                <h2 class="custom-heading">8. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "What CSS problem does the .clearfix class solve?", a: "It solves the 'collapsing parent' issue that occurs when all child elements inside a container are floated, causing the container to have a height of zero."},
+                            {q: "What is the difference between .text-primary and .link-primary?", a: ".text-primary only changes the text color. .link-primary changes the text color AND provides appropriate hover and focus state colors for links."},
+                            {q: "How does the .stretched-link class work under the hood?", a: "It uses a CSS ::after pseudo-element with position: absolute and inset: 0 to stretch over its nearest positioned parent."},
+                            {q: "What is required on the parent container for .stretched-link to work correctly?", a: "The parent container must have position: relative (or any position other than static) applied to it."},
+                            {q: "Which helper class would you use to maintain a 16:9 aspect ratio for an embedded YouTube video?", a: "The .ratio and .ratio-16x9 classes applied to a wrapper div around the iframe."},
+                            {q: "Why might .text-truncate fail to work on a standard <span> tag?", a: "Because a standard <span> is display: inline. .text-truncate requires the element to be display: block or display: inline-block to apply a width constraint."},
+                            {q: "What does the .vr class do?", a: "It creates a vertical line (rule) that scales to the height of its flexbox parent, acting as a visual divider."},
+                            {q: "What is the difference between .fixed-top and .sticky-top?", a: ".fixed-top pins an element permanently to the top of the viewport from the start. .sticky-top acts like normal content until the user scrolls past it, at which point it 'sticks' to the top."},
+                            {q: "Can you stretch multiple links within the same card?", a: "No, multiple stretched links will overlap each other entirely, making only the one with the highest z-index clickable. You should only use one stretched link per positioned parent."},
+                            {q: "How do you add space around a vertical rule (.vr)?", a: "You can use standard margin utilities like .mx-3 along with the .vr class."},
+                            {q: "What CSS property does .text-truncate use to add the '...'?", a: "It uses the text-overflow: ellipsis; property in conjunction with overflow: hidden; and white-space: nowrap;."},
+                            {q: "Is .clearfix still relevant in modern web design?", a: "While Flexbox and CSS Grid have largely replaced floats for layout, .clearfix is still useful for legacy float handling, such as floating images within text blocks."},
+                            {q: "Does .ratio-1x1 create a perfect circle?", a: "No, it creates a perfect square. To make it a circle, you would also need to add the .rounded-circle utility class."},
+                            {q: "Can you change the color of a .vr element?", a: "Yes, you can use text color utilities or background utilities to change its color, as it inherits the text color by default."},
+                            {q: "What happens if a .stretched-link is placed inside a container that does not have position: relative?", a: "The pseudo-element will continue looking up the DOM tree for a positioned ancestor. If it doesn't find one, it will stretch over the entire page body, making the whole page clickable."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 9: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">9. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "Which class ensures a parent div contains its floated children?", opts: ["A) .clear-floats", "B) .clearfix", "C) .float-none", "D) .contain-float"], ans: "B"},
+                            {q: "To create a link that changes color on hover, you should use:", opts: ["A) .text-primary", "B) .hover-primary", "C) .link-primary", "D) .a-primary"], ans: "C"},
+                            {q: "What class makes a link clickable over its entire relative parent container?", opts: ["A) .full-link", "B) .expand-link", "C) .stretched-link", "D) .block-link"], ans: "C"},
+                            {q: "Which aspect ratio class is best for a widescreen video?", opts: ["A) .ratio-4x3", "B) .ratio-16x9", "C) .ratio-21x9", "D) .ratio-1x1"], ans: "B"},
+                            {q: "Which class truncates text with an ellipsis?", opts: ["A) .text-ellipsis", "B) .text-truncate", "C) .truncate", "D) .text-cut"], ans: "B"},
+                            {q: "What does the .vr class stand for?", opts: ["A) Virtual Reality", "B) Vertical Rule", "C) Visual Row", "D) Variable Ratio"], ans: "B"},
+                            {q: "To make a navigation bar stick to the top only after scrolling, use:", opts: ["A) .fixed-top", "B) .absolute-top", "C) .sticky-top", "D) .pin-top"], ans: "C"},
+                            {q: "What CSS display property is required for .text-truncate to work?", opts: ["A) display: inline", "B) display: flex", "C) display: block (or inline-block)", "D) display: grid"], ans: "C"},
+                            {q: "In the context of .stretched-link, what pseudo-element is used?", opts: ["A) ::before", "B) ::after", "C) ::hover", "D) ::first-child"], ans: "B"},
+                            {q: "Which class pins a footer permanently to the bottom of the screen?", opts: ["A) .fixed-bottom", "B) .sticky-bottom", "C) .footer-fixed", "D) .bottom-0"], ans: "A"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-danger mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 10: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">10. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>Explain why you cannot place two `.stretched-link` elements in the same card.</strong><br>
+                        <em>Answer:</em> Both links will stretch to cover the exact same parent container area via absolute positioning. The one appearing last in the HTML (or with a higher z-index) will completely cover the first one, making the first link unclickable.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do you fix a navigation bar to the top of the screen?</strong><br>
+                        <em>Answer:</em> Add the `.fixed-top` helper class to the `<nav>` element.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What is the difference between `.ratio-1x1` and `.ratio-4x3`?</strong><br>
+                        <em>Answer:</em> `.ratio-1x1` forces the container to be a perfect square (equal width and height). `.ratio-4x3` forces a standard television/monitor aspect ratio, where the width is slightly larger than the height.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why is `.clearfix` needed when using floats?</strong><br>
+                        <em>Answer:</em> Because floated elements are removed from standard document flow, causing their parent container to collapse and have a height of 0. `.clearfix` forces the parent to expand to contain the floated children.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do you style a link to be green and have a matching hover state?</strong><br>
+                        <em>Answer:</em> Apply the `.link-success` class to the `<a>` tag.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 11: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">11. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 1: Truncation</h5>
+                                <p>Write a paragraph tag with an inline-block display that truncates text when it exceeds 100px width.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;p class="d-inline-block text-truncate" style="max-width: 100px;"&gt;Very long text here&lt;/p&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 2: Clearfix</h5>
+                                <p>Create a container with the info background and fix the collapsed height issue caused by two floated divs inside it.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <pre><code>&lt;div class="bg-info clearfix"&gt;
+  &lt;div class="float-start"&gt;A&lt;/div&gt;
+  &lt;div class="float-end"&gt;B&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 3: Ratio Wrapper</h5>
+                                <p>Create a 21:9 aspect ratio wrapper for a video.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <pre><code>&lt;div class="ratio ratio-21x9"&gt;
+  &lt;video src="movie.mp4"&gt;&lt;/video&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 4: Vertical Rule</h5>
+                                <p>Create a flex row containing "Login", a vertical rule with horizontal margin 2, and "Register".</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <pre><code>&lt;div class="d-flex"&gt;
+  &lt;a href="#"&gt;Login&lt;/a&gt;
+  &lt;div class="vr mx-2"&gt;&lt;/div&gt;
+  &lt;a href="#"&gt;Register&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 5: Colored Link</h5>
+                                <p>Create an anchor tag that looks like a Danger colored link, rather than standard blue.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <code>&lt;a href="#" class="link-danger"&gt;Delete Account&lt;/a&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 12: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">12. 2 Mini Projects</h2>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Advanced Media Card</h4>
+                    <p><strong>Goal:</strong> Combine multiple helpers into a cohesive component.</p>
+                    <ul>
+                        <li>Create a Bootstrap <code>.card</code> with a specific width (e.g., 300px) and <code>.position-relative</code>.</li>
+                        <li>For the card image, use a <code>.ratio .ratio-4x3</code> wrapper to ensure the image placeholder remains perfectly proportioned.</li>
+                        <li>In the <code>.card-body</code>, add a title and a description.</li>
+                        <li>Force the description to stay on one line using <code>.text-truncate</code>.</li>
+                        <li>Add a "Read More" link at the bottom and use <code>.stretched-link</code> so the entire card becomes clickable.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Sticky Top Toolbar</h4>
+                    <p><strong>Goal:</strong> Build a secondary toolbar that sticks to the top of the screen when scrolled.</p>
+                    <ul>
+                        <li>Create a standard header or hero section at the top of the page.</li>
+                        <li>Below it, create a <code>.d-flex</code> container with a background color and padding.</li>
+                        <li>Add the <code>.sticky-top</code> helper class to this container.</li>
+                        <li>Inside the container, add several <code>.link-secondary</code> text links.</li>
+                        <li>Separate each link visually using the <code>.vr</code> (Vertical Rule) class with appropriate horizontal margins (<code>.mx-3</code>).</li>
+                        <li>Add enough dummy content below the toolbar so you can scroll the page and watch the toolbar stick!</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>

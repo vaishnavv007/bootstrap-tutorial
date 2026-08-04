@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 5 Grid System Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1000;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: #0d6efd;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Custom Grid Demo Styling */
+        .demo-row {
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            margin-bottom: 1rem;
+        }
+        .demo-col {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+        .demo-col:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .code-block {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .explanation {
+            border-left: 4px solid #0d6efd;
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .real-world-box {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Grid Masterclass</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#overview">1. Grid Overview</a>
+            <a class="nav-link" href="#breakpoints">2. Breakpoints</a>
+            <a class="nav-link" href="#sizing">3. Column Sizing & Auto</a>
+            <a class="nav-link" href="#advanced">4. Offsets, Orders & Nesting</a>
+            <a class="nav-link" href="#alignment">5. Grid Alignment</a>
+            <a class="nav-link" href="#real-world">6. Real-World Layouts</a>
+            <a class="nav-link" href="#best-practices">7. Best Practices & Mistakes</a>
+            <a class="nav-link" href="#interview">8. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">9. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">10. Short Answers</a>
+            <a class="nav-link" href="#exercises">11. Coding Exercises</a>
+            <a class="nav-link" href="#projects">12. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap 5 Grid System</h1>
+            <p class="lead text-muted mb-5">The ultimate guide to building responsive layouts using the 12-column flexbox grid.</p>
+
+            <!-- SECTION 1: OVERVIEW -->
+            <section id="overview">
+                <h2>1. Grid System Overview (12-Column)</h2>
+                <hr>
+                <p>Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. The grid is divided into 12 imaginary columns.</p>
+                
+                <div class="explanation">
+                    <strong>Line-by-line concept:</strong><br>
+                    <code>&lt;div class="container"&gt;</code>: Wraps the grid and centers it.<br>
+                    <code>&lt;div class="row"&gt;</code>: A horizontal wrapper for columns. Fixes negative margins.<br>
+                    <code>&lt;div class="col-..."&gt;</code>: The actual content boxes that take up portions of the 12 columns.
+                </div>
+
+                <h4>Visual Demo: 12 Columns</h4>
+                <div class="row demo-row">
+                    <div class="col-1 demo-col">1</div><div class="col-1 demo-col">1</div>
+                    <div class="col-1 demo-col">1</div><div class="col-1 demo-col">1</div>
+                    <div class="col-1 demo-col">1</div><div class="col-1 demo-col">1</div>
+                    <div class="col-1 demo-col">1</div><div class="col-1 demo-col">1</div>
+                    <div class="col-1 demo-col">1</div><div class="col-1 demo-col">1</div>
+                    <div class="col-1 demo-col">1</div><div class="col-1 demo-col">1</div>
+                </div>
+                <div class="row demo-row">
+                    <div class="col-4 demo-col">col-4</div>
+                    <div class="col-4 demo-col">col-4</div>
+                    <div class="col-4 demo-col">col-4</div>
+                </div>
+                <div class="row demo-row">
+                    <div class="col-6 demo-col">col-6</div>
+                    <div class="col-6 demo-col">col-6</div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Code for 3 equal columns --&gt;
+&lt;div class="container"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-4"&gt;col-4&lt;/div&gt;
+        &lt;div class="col-4"&gt;col-4&lt;/div&gt;
+        &lt;div class="col-4"&gt;col-4&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 2: BREAKPOINTS -->
+            <section id="breakpoints">
+                <h2>2. Grid Breakpoints</h2>
+                <hr>
+                <p>Bootstrap includes six default breakpoints based on min-width media queries.</p>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Breakpoint</th>
+                            <th>Class prefix</th>
+                            <th>Dimensions</th>
+                            <th>Typical Device</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Extra small</td><td><code>.col-</code></td><td>&lt;576px</td><td>Mobile portrait</td></tr>
+                        <tr><td>Small</td><td><code>.col-sm-</code></td><td>&ge;576px</td><td>Mobile landscape</td></tr>
+                        <tr><td>Medium</td><td><code>.col-md-</code></td><td>&ge;768px</td><td>Tablets</td></tr>
+                        <tr><td>Large</td><td><code>.col-lg-</code></td><td>&ge;992px</td><td>Laptops</td></tr>
+                        <tr><td>Extra large</td><td><code>.col-xl-</code></td><td>&ge;1200px</td><td>Desktops</td></tr>
+                        <tr><td>Extra extra large</td><td><code>.col-xxl-</code></td><td>&ge;1400px</td><td>Large monitors</td></tr>
+                    </tbody>
+                </table>
+                
+                <h4>Responsive Example</h4>
+                <p>Resize your browser to see this layout change from 1 column (mobile) to 2 (tablet) to 4 (desktop).</p>
+                <div class="row demo-row">
+                    <div class="col-12 col-md-6 col-lg-3 demo-col">Box 1</div>
+                    <div class="col-12 col-md-6 col-lg-3 demo-col">Box 2</div>
+                    <div class="col-12 col-md-6 col-lg-3 demo-col">Box 3</div>
+                    <div class="col-12 col-md-6 col-lg-3 demo-col">Box 4</div>
+                </div>
+<pre><code class="language-html">&lt;!-- Line-by-line explanation --&gt;
+&lt;!-- col-12: Takes full 12 columns on mobile (&lt;768px) --&gt;
+&lt;!-- col-md-6: Takes 6 columns (50% width) on medium screens (&ge;768px) --&gt;
+&lt;!-- col-lg-3: Takes 3 columns (25% width) on large screens (&ge;992px) --&gt;
+&lt;div class="col-12 col-md-6 col-lg-3"&gt;Box 1&lt;/div&gt;
+</code></pre>
+            </section>
+
+            <!-- SECTION 3: SIZING & AUTO -->
+            <section id="sizing">
+                <h2>3. Column Sizing & Auto Layout</h2>
+                <hr>
+                <p>You don't always need to specify a number. The <code>.col</code> class automatically sizes siblings equally.</p>
+                
+                <h4>Auto Layout Demo</h4>
+                <div class="row demo-row">
+                    <div class="col demo-col">Auto</div>
+                    <div class="col-6 demo-col">col-6 (Fixed 50%)</div>
+                    <div class="col demo-col">Auto</div>
+                </div>
+                
+                <h4>Variable Width Content</h4>
+                <div class="row demo-row">
+                    <div class="col demo-col">Fills space</div>
+                    <div class="col-md-auto demo-col">Wraps content exactly to this text length</div>
+                    <div class="col demo-col">Fills space</div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: ADVANCED -->
+            <section id="advanced">
+                <h2>4. Offsets, Ordering & Nesting</h2>
+                <hr>
+                
+                <h4>Offset Columns</h4>
+                <p>Move columns to the right using <code>.offset-md-*</code>.</p>
+                <div class="row demo-row">
+                    <div class="col-md-4 demo-col">.col-md-4</div>
+                    <div class="col-md-4 offset-md-4 demo-col">.col-md-4 .offset-md-4</div>
+                </div>
+
+                <h4>Ordering</h4>
+                <p>Change the visual order of columns regardless of HTML structure using <code>.order-*</code>.</p>
+                <div class="row demo-row">
+                    <div class="col demo-col order-3">First in HTML (Order 3)</div>
+                    <div class="col demo-col order-1">Second in HTML (Order 1)</div>
+                    <div class="col demo-col order-2">Third in HTML (Order 2)</div>
+                </div>
+
+                <h4>Nesting</h4>
+                <p>To nest your content, add a new <code>.row</code> and set of <code>.col-*</code> columns within an existing column.</p>
+                <div class="row demo-row">
+                    <div class="col-sm-9" style="background:#dee2e6; padding:20px; border: 1px solid #aaa;">
+                        Level 1: .col-sm-9
+                        <div class="row mt-3">
+                            <div class="col-8 demo-col">Level 2: .col-8</div>
+                            <div class="col-4 demo-col">Level 2: .col-4</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: ALIGNMENT -->
+            <section id="alignment">
+                <h2>5. Grid Alignment</h2>
+                <hr>
+                <h4>Vertical Alignment (Row level)</h4>
+                <div class="row demo-row align-items-center" style="height: 150px;">
+                    <div class="col demo-col">align-items-center</div>
+                    <div class="col demo-col">align-items-center</div>
+                </div>
+
+                <h4>Horizontal Alignment</h4>
+                <div class="row demo-row justify-content-center">
+                    <div class="col-4 demo-col">justify-content-center</div>
+                    <div class="col-4 demo-col">justify-content-center</div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: REAL WORLD -->
+            <section id="real-world">
+                <h2>6. Real-World Layouts</h2>
+                <hr>
+                
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h4>A. Pricing Cards</h4>
+                        <div class="row text-center">
+                            <div class="col-lg-4 mb-3">
+                                <div class="card h-100 real-world-box">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Basic</h5>
+                                        <h2 class="card-price">$9<small class="text-muted fw-light">/mo</small></h2>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <li>10 users included</li>
+                                            <li>2 GB of storage</li>
+                                        </ul>
+                                        <button type="button" class="w-100 btn btn-outline-primary">Sign up</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <div class="card h-100 real-world-box border-primary">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">Pro</h5>
+                                        <h2 class="card-price">$29<small class="text-muted fw-light">/mo</small></h2>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <li>20 users included</li>
+                                            <li>10 GB of storage</li>
+                                        </ul>
+                                        <button type="button" class="w-100 btn btn-primary">Get started</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <div class="card h-100 real-world-box">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Enterprise</h5>
+                                        <h2 class="card-price">$99<small class="text-muted fw-light">/mo</small></h2>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <li>Unlimited users</li>
+                                            <li>100 GB of storage</li>
+                                        </ul>
+                                        <button type="button" class="w-100 btn btn-outline-primary">Contact us</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h4>B. Simple Blog Layout</h4>
+                        <div class="row g-4">
+                            <!-- Main Content -->
+                            <div class="col-md-8">
+                                <article class="real-world-box mb-4">
+                                    <h2>Blog Post Title</h2>
+                                    <p class="text-muted">January 1, 2024 by Admin</p>
+                                    <p>This is a standard blog layout using an 8-column main area and a 4-column sidebar on desktop, which stacks on mobile.</p>
+                                </article>
+                            </div>
+                            <!-- Sidebar -->
+                            <div class="col-md-4">
+                                <div class="real-world-box mb-4 bg-light">
+                                    <h4>About</h4>
+                                    <p>This is a nested sidebar widget. It automatically drops below the main content on screens smaller than 768px.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: BEST PRACTICES -->
+            <section id="best-practices">
+                <h2>7. Best Practices & Common Mistakes</h2>
+                <hr>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-success text-white mb-3">
+                            <div class="card-header">Best Practices</div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Mobile First:</strong> Code for <code>.col-</code> first, then scale up using <code>.col-md-</code>, etc.</li>
+                                <li class="list-group-item"><strong>Container usage:</strong> Always place rows inside a <code>.container</code> or <code>.container-fluid</code>.</li>
+                                <li class="list-group-item"><strong>Gutters:</strong> Use <code>g-*</code> classes on rows to control spacing between columns.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-danger text-white mb-3">
+                            <div class="card-header">Common Mistakes</div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Orphan Columns:</strong> Placing a <code>.col</code> directly inside a container without a <code>.row</code> (Breaks padding/margins).</li>
+                                <li class="list-group-item"><strong>Over-specifying:</strong> Writing <code>col-12 col-sm-12 col-md-12</code>. Just write <code>col-12</code>.</li>
+                                <li class="list-group-item"><strong>Nesting containers:</strong> Never put a <code>.container</code> inside another <code>.container</code>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 8: INTERVIEWS -->
+            <section id="interview">
+                <h2>8. 15 Interview Questions with Answers</h2>
+                <hr>
+                <div class="accordion" id="accordionInterview">
+                    <!-- Generating 15 Items compactly -->
+                    <script>
+                        const questions = [
+                            {q: "What is the Bootstrap Grid System based on?", a: "It is based on CSS Flexbox and uses a 12-column layout to build responsive interfaces."},
+                            {q: "What is the difference between container and container-fluid?", a: ".container provides a responsive fixed-width, while .container-fluid spans 100% of the viewport width across all breakpoints."},
+                            {q: "Why do we need a .row?", a: ".row acts as a wrapper for columns and applies negative margins to counteract the padding on columns, ensuring content aligns properly."},
+                            {q: "Explain the 'mobile-first' approach in Bootstrap.", a: "CSS rules are written for the smallest screens first (.col-), and media queries are used to override them for larger screens (.col-md-, .col-lg-)."},
+                            {q: "How many columns does the grid have by default?", a: "12 columns."},
+                            {q: "What does the col-md-auto class do?", a: "It sizes the column based on the natural width of its content on medium screens and up."},
+                            {q: "How do you add space between columns?", a: "Using Gutter classes like g-2, gx-3, or gy-4 applied to the .row."},
+                            {q: "Can you nest grids?", a: "Yes, you can add a .row and .col-* inside an existing .col-*."},
+                            {q: "What is an offset in Bootstrap?", a: "Offsets move columns to the right. For example, .offset-md-2 moves the column 2 spaces to the right on medium screens."},
+                            {q: "How do you reorder columns visually?", a: "By using the .order-* utility classes (e.g., .order-1, .order-last)."},
+                            {q: "What happens if a row contains more than 12 columns?", a: "The extra columns will wrap to a new line automatically."},
+                            {q: "How do you center columns horizontally?", a: "Apply .justify-content-center to the parent .row."},
+                            {q: "How do you center columns vertically?", a: "Apply .align-items-center to the parent .row."},
+                            {q: "What breakpoint does .col-xl- target?", a: "Extra large screens, typically 1200px and wider."},
+                            {q: "What is the difference between .col and .col-*?", a: ".col automatically distributes equal width among sibling columns, while .col-* specifies an exact fractional width out of 12."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 9: MCQs -->
+            <section id="mcq">
+                <h2>9. 10 Multiple Choice Questions (MCQs)</h2>
+                <hr>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "Which class is required to wrap columns?", opts: ["A) .container", "B) .grid", "C) .row", "D) .wrap"], ans: "C"},
+                            {q: "What is the smallest breakpoint class prefix?", opts: ["A) .col-xs-", "B) .col-sm-", "C) .col-", "D) .col-md-"], ans: "C"},
+                            {q: "How to create a column that takes up 50% of the screen on desktops?", opts: ["A) .col-50", "B) .col-lg-6", "C) .col-md-5", "D) .desktop-6"], ans: "B"},
+                            {q: "Which class removes gutters from a row?", opts: ["A) .no-gutter", "B) .g-0", "C) .gx-none", "D) .gutter-0"], ans: "B"},
+                            {q: "To push a column 3 spaces to the right on large screens, use:", opts: ["A) .push-lg-3", "B) .move-lg-3", "C) .offset-lg-3", "D) .margin-3"], ans: "C"},
+                            {q: "Bootstrap 5 grid uses which CSS layout module?", opts: ["A) Floats", "B) CSS Grid", "C) Flexbox", "D) Tables"], ans: "C"},
+                            {q: "What happens if you place 4 .col-4 divs in one row?", opts: ["A) They shrink to 25%", "B) The 4th wraps to the next line", "C) Error", "D) They hide"], ans: "B"},
+                            {q: "Which class centers a column horizontally inside a row?", opts: ["A) text-center", "B) justify-content-center", "C) align-center", "D) mx-auto"], ans: "B"},
+                            {q: "If I write class='col-12 col-md-6', what width is it on mobile?", opts: ["A) 50%", "B) 100%", "C) Hidden", "D) 0%"], ans: "B"},
+                            {q: "How do you make a column order last on all devices?", opts: ["A) .order-last", "B) .order-12", "C) .float-end", "D) .last-col"], ans: "A"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-success mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 10: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2>10. 5 Short Answer Questions</h2>
+                <hr>
+                <ol>
+                    <li class="mb-3">
+                        <strong>Explain the purpose of the <code>.row</code> class.</strong><br>
+                        <em>Answer:</em> It creates a flexbox container for columns and uses negative margins to offset the padding applied to those columns, ensuring neat alignment with container edges.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do gutters (<code>g-*</code>) work in Bootstrap 5?</strong><br>
+                        <em>Answer:</em> Gutters control the horizontal (gx) and vertical (gy) gaps between columns. They scale from 0 to 5, mapped to rem utilities.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What is the functional difference between <code>.col</code> and <code>.col-12</code>?</strong><br>
+                        <em>Answer:</em> <code>.col</code> scales flexibly to share space equally with sibling columns. <code>.col-12</code> forces the column to span 100% of the row regardless of siblings.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why must columns be immediate children of a row?</strong><br>
+                        <em>Answer:</em> Because the grid mathematics rely on the row's negative margins and the flexbox context to align column padding precisely.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Describe how to hide a column on mobile but show it on desktop.</strong><br>
+                        <em>Answer:</em> Use <code>d-none d-lg-block</code> on the column.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 11: EXERCISES -->
+            <section id="exercises">
+                <h2>11. 5 Coding Exercises</h2>
+                <hr>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 1: Basic Responsive Split</h5>
+                                <p>Create a layout that is 1 column on mobile, 2 columns on tablet, and 4 columns on large desktops.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans1">Show Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;div class="col-12 col-md-6 col-lg-3"&gt;...&lt;/div&gt;</code> (x4)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 2: Sidebar Layout</h5>
+                                <p>Create an 8-column main content area and a 4-column sidebar that drops to the bottom on screens smaller than 992px.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans2">Show Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <code>&lt;div class="col-12 col-lg-8"&gt;&lt;/div&gt;<br>&lt;div class="col-12 col-lg-4"&gt;&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 3: Centered Login Form</h5>
+                                <p>Create a row containing a 6-column div (on medium screens) that is perfectly centered horizontally.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans3">Show Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <code>&lt;div class="row justify-content-center"&gt;<br>&nbsp;&nbsp;&lt;div class="col-md-6"&gt;...&lt;/div&gt;<br>&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 4: Nesting</h5>
+                                <p>Create a 6-column div. Inside it, create two 6-column divs side-by-side.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans4">Show Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <pre><code>&lt;div class="col-6"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-6"&gt;A&lt;/div&gt;
+    &lt;div class="col-6"&gt;B&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 5: Offset Navigation</h5>
+                                <p>Create a row with a logo taking up 3 columns, and navigation taking up 4 columns but pushed all the way to the right.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans5">Show Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <code>&lt;div class="row"&gt;<br>&nbsp;&nbsp;&lt;div class="col-3"&gt;Logo&lt;/div&gt;<br>&nbsp;&nbsp;&lt;div class="col-4 offset-5"&gt;Nav&lt;/div&gt;<br>&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 12: MINI PROJECTS -->
+            <section id="projects">
+                <h2>12. 2 Mini Projects</h2>
+                <hr>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Product Gallery Grid</h4>
+                    <p><strong>Goal:</strong> Build an e-commerce image gallery.</p>
+                    <ul>
+                        <li>Use <code>.container</code> and <code>.row</code> with <code>g-3</code> for spacing.</li>
+                        <li>Mobile: 1 item per row.</li>
+                        <li>Tablet: 2 items per row.</li>
+                        <li>Desktop: 3 items per row.</li>
+                        <li>Extra Large: 4 items per row.</li>
+                    </ul>
+                    <div class="alert alert-secondary">
+                        <strong>Hint Code:</strong> <code>&lt;div class="col-12 col-md-6 col-lg-4 col-xl-3"&gt;</code> applied to each product card.
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Project 2: Admin Dashboard Layout</h4>
+                    <p><strong>Goal:</strong> Structure a complex web application interface.</p>
+                    <ul>
+                        <li>Create a top navigation bar (outside the grid or in a 12-col row).</li>
+                        <li>Create a sidebar that takes 2 columns on desktop, hidden on mobile (<code>.d-none .d-md-block .col-md-2</code>).</li>
+                        <li>Create a main content area taking the remaining 10 columns (<code>.col-12 .col-md-10</code>).</li>
+                        <li>Inside the main content area, create a row of 4 KPI cards (use <code>.col-sm-6 .col-lg-3</code>).</li>
+                    </ul>
+                    <div class="alert alert-secondary">
+                        <strong>Objective:</strong> Practice nesting rows inside the 10-column main content area without breaking horizontal scrolling.
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <footer class="text-center text-muted mt-5 mb-3">
+            <small>&copy; 2026 Grid Masterclass Tutorial</small>
+        </footer>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

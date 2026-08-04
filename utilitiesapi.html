@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 9: Bootstrap Utility API Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #0dcaf0; /* Cyan for Module 9 */
+            --theme-hover: #0a9dbe;
+            --theme-light: #e0f8fd;
+            --text-dark: #212529;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-hover);
+        }
+        .sidebar h6 {
+            color: #6c757d;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-hover);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Module 9: Utility API</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#overview">1. Overview</a>
+            <a class="nav-link" href="#anatomy">2. Anatomy of the Map</a>
+            <a class="nav-link" href="#adding">3. Adding Utilities</a>
+            <a class="nav-link" href="#modifying">4. Modifying Utilities</a>
+            <a class="nav-link" href="#removing">5. Removing Utilities</a>
+            <a class="nav-link" href="#responsive">6. Responsive Utilities</a>
+            <a class="nav-link" href="#states">7. State Utilities</a>
+            
+            <h6 class="px-3 mt-4 mb-2 text-muted text-uppercase" style="font-size:0.8rem">Assessments</h6>
+            <a class="nav-link" href="#interview">8. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">9. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">10. Short Answers</a>
+            <a class="nav-link" href="#exercises">11. Coding Exercises</a>
+            <a class="nav-link" href="#projects">12. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Utility API</h1>
+            <p class="lead text-muted mb-5">Learn how to generate, modify, and remove custom utility classes using Bootstrap 5's powerful Sass-based Utility API.</p>
+
+            <div class="alert alert-info border-info mb-5">
+                <strong>Important Note:</strong> Unlike previous modules which relied purely on HTML classes, the Utility API requires <strong>Sass (SCSS) compilation</strong>. The code snippets in this module demonstrate the Sass code you would write in your custom <code>.scss</code> file before compiling it into your final CSS.
+            </div>
+
+            <!-- 1. OVERVIEW -->
+            <section id="overview">
+                <h2 class="custom-heading">1. Overview of the Utility API</h2>
+                <p>Bootstrap 5 introduced a feature-rich Sass map called <code>$utilities</code>. This map acts as an engine that generates all the utility classes (like <code>.m-3</code>, <code>.text-center</code>, <code>.w-50</code>, etc.) during the Sass compilation process.</p>
+                <div class="explanation">
+                    <strong>Why use it?</strong> Instead of writing dozens of custom CSS classes for your specific design system, you simply add rules to the <code>$utilities</code> map. Bootstrap handles generating the standard classes, responsive variations, and pseudo-class states automatically.
+                </div>
+            </section>
+
+            <!-- 2. ANATOMY OF THE MAP -->
+            <section id="anatomy">
+                <h2 class="custom-heading">2. Anatomy of a Utility</h2>
+                <p>A utility inside the <code>$utilities</code> map is defined by a key (the utility name) and a map of options (properties, values, prefixes).</p>
+                
+                <div class="code-block">
+<pre><code class="language-scss">// Conceptual structure of a utility in Sass
+$utilities: (
+  "utility-key": (
+    property: css-property-name,
+    class: css-class-prefix,
+    values: (
+      class-suffix: css-value
+    )
+  )
+);</code></pre>
+                </div>
+                <ul>
+                    <li><code>property</code>: The actual CSS property being changed (e.g., <code>opacity</code>).</li>
+                    <li><code>class</code>: (Optional) The prefix for the generated HTML class. Defaults to the property name if omitted.</li>
+                    <li><code>values</code>: A map or list of values that generate the suffixes (e.g., <code>50: 0.5</code> generates <code>.opacity-50</code>).</li>
+                </ul>
+            </section>
+
+            <!-- 3. ADDING UTILITIES -->
+            <section id="adding">
+                <h2 class="custom-heading">3. Adding Custom Utilities</h2>
+                <p>To add a brand new utility, you use the Sass <code>map-merge()</code> function to merge your custom definitions into Bootstrap's default <code>$utilities</code> map.</p>
+                
+                <div class="demo-container">
+                    <p><em>Example: Creating custom cursor utilities.</em></p>
+                    <p>The code below generates classes like <code>.cursor-pointer</code>, <code>.cursor-wait</code>, and <code>.cursor-not-allowed</code>.</p>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-scss">// 1. Import Bootstrap's variables and maps first
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/utilities";
+
+// 2. Add your custom utility
+$utilities: map-merge(
+  $utilities,
+  (
+    "cursor": (
+      property: cursor,
+      class: cursor,
+      values: pointer, wait, not-allowed
+    )
+  )
+);
+
+// 3. Import the rest of Bootstrap
+@import "bootstrap/scss/bootstrap";</code></pre>
+                </div>
+            </section>
+
+            <!-- 4. MODIFYING UTILITIES -->
+            <section id="modifying">
+                <h2 class="custom-heading">4. Modifying Existing Utilities</h2>
+                <p>You can override existing utilities by referencing their exact key name in the map. This is perfect for changing the prefix or adding new values to an existing scale.</p>
+                
+                <div class="demo-container">
+                    <p><em>Example: Adding a new width value to the existing width utilities.</em></p>
+                    <p>By default, Bootstrap provides <code>.w-25</code>, <code>.w-50</code>, <code>.w-75</code>, and <code>.w-100</code>. Let's add <code>.w-10</code> and <code>.w-33</code>.</p>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-scss">$utilities: map-merge(
+  $utilities,
+  (
+    "width": map-merge(
+      map-get($utilities, "width"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "width"), "values"),
+          (
+            10: 10%,
+            33: 33.3333%
+          )
+        )
+      )
+    )
+  )
+);</code></pre>
+                </div>
+            </section>
+
+            <!-- 5. REMOVING UTILITIES -->
+            <section id="removing">
+                <h2 class="custom-heading">5. Removing Utilities</h2>
+                <p>If you want to keep your final CSS file size small, you can remove utility classes you don't use by setting their key to <code>false</code> or <code>null</code>.</p>
+                
+                <div class="code-block">
+<pre><code class="language-scss">$utilities: map-merge(
+  $utilities,
+  (
+    // Remove the opacity utilities entirely
+    "opacity": false,
+    // Remove floats
+    "float": false
+  )
+);</code></pre>
+                </div>
+            </section>
+
+            <!-- 6. RESPONSIVE UTILITIES -->
+            <section id="responsive">
+                <h2 class="custom-heading">6. Responsive Utilities</h2>
+                <p>Bootstrap can automatically generate breakpoint variations (e.g., <code>-sm</code>, <code>-md</code>, <code>-lg</code>) for your custom utility. Just add <code>responsive: true</code>.</p>
+                
+                <div class="code-block">
+<pre><code class="language-scss">$utilities: map-merge(
+  $utilities,
+  (
+    "object-fit": (
+      property: object-fit,
+      class: obj,
+      responsive: true, // Automatically generates .obj-md-cover etc.
+      values: (
+        contain: contain,
+        cover: cover
+      )
+    )
+  )
+);</code></pre>
+                </div>
+            </section>
+
+            <!-- 7. STATE UTILITIES -->
+            <section id="states">
+                <h2 class="custom-heading">7. State Utilities (Hover / Focus)</h2>
+                <p>Generate pseudo-class variations like <code>:hover</code> or <code>:focus</code> by adding the <code>state</code> key to your utility.</p>
+                
+                <div class="code-block">
+<pre><code class="language-scss">$utilities: map-merge(
+  $utilities,
+  (
+    "opacity": map-merge(
+      map-get($utilities, "opacity"),
+      (
+        state: hover // Generates classes like .opacity-50-hover
+      )
+    )
+  )
+);</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 8: INTERVIEWS -->
+            <section id="interview">
+                <h2 class="custom-heading">8. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "What is the Bootstrap Utility API?", a: "It is a Sass-based feature that uses a large map variable ($utilities) to automatically generate utility classes, making it easy to add, modify, or remove CSS utilities in your project."},
+                            {q: "Does the Utility API run in the browser using JavaScript?", a: "No, it operates during the Sass compilation process. You write the Sass configuration, compile it, and it outputs static CSS."},
+                            {q: "Which Sass function is heavily used to add new utilities to the map?", a: "The map-merge() function is used to merge custom utility definitions into the default $utilities map."},
+                            {q: "In the utility map, what does the 'property' key define?", a: "It defines the actual CSS property that will be applied (e.g., background-color, opacity, cursor)."},
+                            {q: "If the 'class' key is omitted from a utility definition, what prefix is used for the HTML class?", a: "The prefix defaults to the name of the CSS property defined in the 'property' key."},
+                            {q: "How do you remove an existing utility from Bootstrap?", a: "By using map-merge to set that specific utility key's value to false or null in the $utilities map."},
+                            {q: "What does setting 'responsive: true' do in a utility definition?", a: "It instructs the compiler to generate responsive variations of the class across all breakpoints (e.g., generating .class-sm-value, .class-md-value)."},
+                            {q: "How can you create a hover state class using the Utility API?", a: "By adding 'state: hover' to the utility definition. It will output classes with a '-hover' suffix (e.g., .bg-primary-hover)."},
+                            {q: "Can you pass a list (array) instead of a map to the 'values' key?", a: "Yes, you can pass a list of strings (like pointer, wait, default). The Sass compiler will use the string as both the class suffix and the CSS value."},
+                            {q: "Where in the Sass compilation order must you modify the $utilities map?", a: "You must modify it *after* importing Bootstrap's functions, variables, and default utilities, but *before* importing the rest of Bootstrap (or the utilities generator)."},
+                            {q: "What happens if you define a custom class suffix of '0' for a margin utility?", a: "The API will generate a class ending in -0 (e.g., .m-0) and assign it the CSS value you mapped to it."},
+                            {q: "What is the purpose of the 'css-var' key in the Utility API?", a: "Setting 'css-var: true' allows the utility to generate CSS variables instead of direct CSS property declarations."},
+                            {q: "How would you change the default primary color using Sass?", a: "You wouldn't use the Utility API directly for this; you would override the $primary variable before importing Bootstrap. The Utility API will then automatically generate classes using that new color."},
+                            {q: "Why is the Utility API considered better than writing manual CSS classes?", a: "It ensures naming consistency, automatically generates responsive/hover states without repetitive typing, and keeps the final CSS file lean by allowing you to easily strip unused utilities."},
+                            {q: "Is it possible to add multiple properties to a single utility class?", a: "No, a single utility definition typically targets one property. However, you can use Sass mixins or custom CSS for complex multi-property classes outside of the API."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 9: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">9. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "What technology is required to use the Bootstrap Utility API?", a: "HTML", b: "JavaScript", c: "Sass (SCSS)", d: "Python", ans: "C"},
+                            {q: "What is the name of the Sass map that stores all utility definitions?", a: "$helpers", b: "$utilities", c: "$bootstrap-utils", d: "$classes", ans: "B"},
+                            {q: "Which key dictates the HTML class prefix?", a: "prefix:", b: "name:", c: "class:", d: "html:", ans: "C"},
+                            {q: "How do you completely remove a utility to reduce CSS bloat?", a: "Delete it from the source code", b: "Set it to false in map-merge", c: "Use display: none", d: "Add class='remove'", ans: "B"},
+                            {q: "Which key generates breakpoint-specific classes (e.g. -md, -lg)?", a: "breakpoints: true", b: "media: all", c: "responsive: true", d: "mobile-first: true", ans: "C"},
+                            {q: "Which Sass function is used to add new data to the $utilities map?", a: "map-add()", b: "map-merge()", c: "array_push()", d: "sass-append()", ans: "B"},
+                            {q: "To create a :hover variant of a utility, you add:", a: "pseudo: hover", b: "state: hover", c: "hover: true", d: "variant: hover", ans: "B"},
+                            {q: "What happens if 'class' is omitted in a utility definition?", a: "The code throws an error", b: "The property name is used as the class prefix", c: "No class is generated", d: "It defaults to 'util'", ans: "B"},
+                            {q: "In what file type do you write Utility API modifications?", a: ".js", b: ".html", c: ".scss", d: ".json", ans: "C"},
+                            {q: "What CSS property does the 'opacity' utility map to by default?", a: "visibility", b: "display", c: "alpha", d: "opacity", ans: "D"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">A) ${m.a} &nbsp;|&nbsp; B) ${m.b} &nbsp;|&nbsp; C) ${m.c} &nbsp;|&nbsp; D) ${m.d}</span><br>
+                                <button class="btn btn-sm btn-outline-info mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 10: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">10. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>Briefly describe the relationship between the `property`, `class`, and `values` keys.</strong><br>
+                        <em>Answer:</em> `property` is the CSS rule being affected (e.g., `width`). `class` is the string prefix for the HTML class (e.g., `w`). `values` are the map of suffixes and CSS values appended to the class (e.g., `50: 50%` creates `.w-50 { width: 50%; }`).
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why is it crucial to import Bootstrap variables and maps *before* modifying the Utility API?</strong><br>
+                        <em>Answer:</em> Because the `$utilities` map is defined in those initial files. You cannot use `map-merge` on a map that hasn't been instantiated yet.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How would you disable responsive versions of the `margin` utility?</strong><br>
+                        <em>Answer:</em> You would map-merge into `$utilities`, target the `"margin"` key, and set `responsive: false`.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What is the difference between overriding a Sass variable and modifying the Utility API?</strong><br>
+                        <em>Answer:</em> Overriding a variable (like `$primary: #000`) changes a value globally across all components. Modifying the Utility API specifically manages the generation of single-purpose CSS utility classes (like `.bg-primary`).
+                    </li>
+                    <li class="mb-3">
+                        <strong>Give one reason why removing unused utilities using `false` is a good practice.</strong><br>
+                        <em>Answer:</em> It drastically reduces the final compiled CSS file size, improving website load times and performance.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 11: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">11. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-info">
+                            <div class="card-body">
+                                <h5>Exercise 1: Remove Width Utility</h5>
+                                <p>Write the Sass snippet to completely remove the width utility from generating.</p>
+                                <button class="btn btn-sm btn-info text-white" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <pre><code>$utilities: map-merge(
+  $utilities, ( "width": false )
+);</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-info">
+                            <div class="card-body">
+                                <h5>Exercise 2: Create a Z-index Utility</h5>
+                                <p>Write a utility that generates <code>.z-index-10</code> and <code>.z-index-20</code> with values 10 and 20.</p>
+                                <button class="btn btn-sm btn-info text-white" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <pre><code>"z-index": (
+  property: z-index,
+  class: z-index,
+  values: (
+    10: 10,
+    20: 20
+  )
+)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-info">
+                            <div class="card-body">
+                                <h5>Exercise 3: Responsive Cursor</h5>
+                                <p>Add the property required to make a cursor utility generate responsive classes (e.g., <code>.cursor-md-pointer</code>).</p>
+                                <button class="btn btn-sm btn-info text-white" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <pre><code>"cursor": (
+  property: cursor,
+  responsive: true,
+  // ... values ...
+)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-info">
+                            <div class="card-body">
+                                <h5>Exercise 4: Hover State Shadow</h5>
+                                <p>Write the snippet to add a hover state to the existing shadow utility.</p>
+                                <button class="btn btn-sm btn-info text-white" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <pre><code>"shadow": map-merge(
+  map-get($utilities, "shadow"),
+  ( state: hover )
+)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-info">
+                            <div class="card-body">
+                                <h5>Exercise 5: Add a new border radius</h5>
+                                <p>Add a new value `xl` to the border-radius utility.</p>
+                                <button class="btn btn-sm btn-info text-white" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <pre><code>"rounded": map-merge(
+  map-get($utilities, "rounded"),
+  (
+    values: map-merge(
+      map-get(map-get($utilities, "rounded"), "values"),
+      ( xl: 2rem )
+    )
+  )
+)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 12: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">12. 2 Mini Projects</h2>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Text Decoration Extensions</h4>
+                    <p><strong>Goal:</strong> Add custom text-decoration styles via the Utility API.</p>
+                    <ul>
+                        <li>Set up a SCSS file importing Bootstrap.</li>
+                        <li>Target the existing <code>text-decoration</code> utility using <code>map-merge</code>.</li>
+                        <li>Add new values to support text-decoration styles like <code>wavy</code>, <code>dashed</code>, and <code>dotted</code>.</li>
+                        <li>Enable <code>state: hover</code> so you can create HTML like: <code>&lt;a href="#" class="text-decoration-dashed-hover"&gt;Link&lt;/a&gt;</code>.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Filter Utilities Engine</h4>
+                    <p><strong>Goal:</strong> Build a brand new CSS Filter utility from scratch.</p>
+                    <ul>
+                        <li>Create a new entry in <code>$utilities</code> called <code>"filter"</code>.</li>
+                        <li>Set the <code>property</code> to <code>filter</code>.</li>
+                        <li>Set the <code>class</code> to <code>blur</code>.</li>
+                        <li>Set <code>responsive: true</code>.</li>
+                        <li>Define values mapping sizes to blur strings (e.g., <code>sm: blur(2px)</code>, <code>lg: blur(10px)</code>).</li>
+                        <li>Compile the Sass and use <code>.blur-md-lg</code> on an image in your HTML!</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7: Bootstrap Utilities Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #fd7e14; /* Orange for Module 7 */
+            --theme-hover: #e86e04;
+            --theme-light: #ffe5d0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-color);
+        }
+        .sidebar h6 {
+            color: #6c757d;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .demo-box {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background-color: #e9ecef;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 80px;
+            font-weight: bold;
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-hover);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-3 text-white">Module 7: Utilities</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <h6 class="px-3 mb-2">Styling Utilities</h6>
+            <a class="nav-link" href="#colors">1. Colors</a>
+            <a class="nav-link" href="#background">2. Background</a>
+            <a class="nav-link" href="#borders">3. Borders</a>
+            <a class="nav-link" href="#opacity">4. Opacity</a>
+            <a class="nav-link" href="#shadows">5. Shadows</a>
+            
+            <h6 class="px-3 mb-2">Layout Utilities</h6>
+            <a class="nav-link" href="#display">6. Display Utilities</a>
+            <a class="nav-link" href="#flexbox">7. Flexbox</a>
+            <a class="nav-link" href="#float">8. Float</a>
+            <a class="nav-link" href="#overflow">9. Overflow</a>
+            <a class="nav-link" href="#position">10. Position</a>
+            <a class="nav-link" href="#sizing">11. Sizing</a>
+            <a class="nav-link" href="#spacing">12. Spacing</a>
+            
+            <h6 class="px-3 mb-2">Misc Utilities</h6>
+            <a class="nav-link" href="#interactions">13. Interactions</a>
+            <a class="nav-link" href="#text">14. Text Utilities</a>
+            <a class="nav-link" href="#vertical-align">15. Vertical Alignment</a>
+            <a class="nav-link" href="#visibility">16. Visibility</a>
+            
+            <h6 class="px-3 mb-2">Assessments</h6>
+            <a class="nav-link" href="#interview">17. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">18. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">19. Short Answers</a>
+            <a class="nav-link" href="#exercises">20. Coding Exercises</a>
+            <a class="nav-link" href="#projects">21. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Utilities</h1>
+            <p class="lead text-muted mb-5">Single-purpose utility classes designed to reduce CSS bloat and speed up development.</p>
+
+            <!-- 1. COLORS -->
+            <section id="colors">
+                <h2 class="custom-heading">1. Colors</h2>
+                <p>Convey meaning through color with a handful of color utility classes. Includes support for styling links with hover states, too.</p>
+                <div class="demo-container">
+                    <p class="text-primary">.text-primary</p>
+                    <p class="text-secondary">.text-secondary</p>
+                    <p class="text-success">.text-success</p>
+                    <p class="text-danger">.text-danger</p>
+                    <p class="text-warning bg-dark">.text-warning (on dark bg)</p>
+                    <p class="text-info bg-dark">.text-info (on dark bg)</p>
+                    <p class="text-body-tertiary">.text-body-tertiary (subtle text)</p>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;p class="text-primary"&gt;Primary colored text&lt;/p&gt;
+&lt;p class="text-danger"&gt;Danger colored text&lt;/p&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 2. BACKGROUND -->
+            <section id="background">
+                <h2 class="custom-heading">2. Background</h2>
+                <p>Similar to the contextual text color classes, easily set the background of an element to any contextual class.</p>
+                <div class="demo-container">
+                    <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
+                    <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+                    <div class="p-3 mb-2 bg-info text-dark">.bg-info</div>
+                    <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
+                    <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
+                </div>
+<pre><code class="language-html">&lt;div class="bg-primary text-white p-3"&gt;Primary background with white text&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- 3. BORDERS -->
+            <section id="borders">
+                <h2 class="custom-heading">3. Borders</h2>
+                <p>Use border utilities to add or remove an element’s borders. Choose from all borders or one at a time.</p>
+                <div class="demo-container text-center">
+                    <span class="demo-box border">border</span>
+                    <span class="demo-box border-top">top</span>
+                    <span class="demo-box border-end">end</span>
+                    <span class="demo-box border-bottom">bottom</span>
+                    <span class="demo-box border-start">start</span>
+                    <br>
+                    <span class="demo-box border border-danger">danger</span>
+                    <span class="demo-box border border-3">width-3</span>
+                    <span class="demo-box border rounded">rounded</span>
+                    <span class="demo-box border rounded-circle">circle</span>
+                    <span class="demo-box border rounded-pill" style="width:120px;">pill</span>
+                </div>
+            </section>
+
+            <!-- 4. OPACITY -->
+            <section id="opacity">
+                <h2 class="custom-heading">4. Opacity</h2>
+                <p>Control the opacity of elements.</p>
+                <div class="demo-container">
+                    <div class="p-3 mb-2 bg-primary text-white opacity-100">100% opacity</div>
+                    <div class="p-3 mb-2 bg-primary text-white opacity-75">75% opacity</div>
+                    <div class="p-3 mb-2 bg-primary text-white opacity-50">50% opacity</div>
+                    <div class="p-3 mb-2 bg-primary text-white opacity-25">25% opacity</div>
+                </div>
+            </section>
+
+            <!-- 5. SHADOWS -->
+            <section id="shadows">
+                <h2 class="custom-heading">5. Shadows</h2>
+                <p>Add or remove shadows to elements with box-shadow utilities.</p>
+                <div class="demo-container bg-light p-4">
+                    <div class="shadow-none p-3 mb-4 bg-white rounded">No shadow (.shadow-none)</div>
+                    <div class="shadow-sm p-3 mb-4 bg-white rounded">Small shadow (.shadow-sm)</div>
+                    <div class="shadow p-3 mb-4 bg-white rounded">Regular shadow (.shadow)</div>
+                    <div class="shadow-lg p-3 bg-white rounded">Larger shadow (.shadow-lg)</div>
+                </div>
+            </section>
+
+            <!-- 6. DISPLAY -->
+            <section id="display">
+                <h2 class="custom-heading">6. Display Utilities</h2>
+                <p>Quickly and responsively toggle the display value of components and more with our display utilities.</p>
+                <div class="demo-container">
+                    <div class="d-inline p-2 bg-primary text-white">d-inline</div>
+                    <div class="d-inline p-2 bg-dark text-white">d-inline</div>
+                    
+                    <div class="d-block p-2 bg-success text-white mt-3">d-block (takes up full width)</div>
+                    
+                    <div class="d-none d-md-block p-2 bg-danger text-white mt-3">
+                        Hides on mobile, displays as block on medium screens and up!
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. FLEXBOX -->
+            <section id="flexbox">
+                <h2 class="custom-heading">7. Flexbox</h2>
+                <p>Quickly manage the layout, alignment, and sizing of grid columns, navigation, components, and more.</p>
+                <div class="demo-container">
+                    <h6>Justify Content</h6>
+                    <div class="d-flex justify-content-between mb-3 bg-light p-2 border">
+                        <div class="p-2 bg-primary text-white">Flex item 1</div>
+                        <div class="p-2 bg-primary text-white">Flex item 2</div>
+                        <div class="p-2 bg-primary text-white">Flex item 3</div>
+                    </div>
+                    
+                    <h6>Align Items</h6>
+                    <div class="d-flex align-items-center bg-light p-2 border" style="height: 100px;">
+                        <div class="p-2 bg-success text-white">Vertically Centered</div>
+                    </div>
+                </div>
+<pre><code class="language-html">&lt;div class="d-flex justify-content-between align-items-center"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- 8. FLOAT -->
+            <section id="float">
+                <h2 class="custom-heading">8. Float</h2>
+                <p>Toggle floats on any element, across any breakpoint.</p>
+                <div class="demo-container clearfix">
+                    <div class="float-start p-3 bg-info">Float start</div>
+                    <div class="float-end p-3 bg-warning">Float end</div>
+                </div>
+                <div class="explanation">
+                    <strong>Clearfix:</strong> If you use floats, remember to add <code>.clearfix</code> to the parent container so it doesn't collapse!
+                </div>
+            </section>
+
+            <!-- 9. OVERFLOW -->
+            <section id="overflow">
+                <h2 class="custom-heading">9. Overflow</h2>
+                <p>Adjust how content overflows an element's bounding box.</p>
+                <div class="demo-container d-flex justify-content-around">
+                    <div class="overflow-auto p-3 bg-light border" style="max-width: 200px; max-height: 100px;">
+                        This is an example of overflow-auto. When the content is too large, a scrollbar appears automatically.
+                    </div>
+                    <div class="overflow-hidden p-3 bg-light border" style="max-width: 200px; max-height: 100px;">
+                        This is an example of overflow-hidden. Any content outside the bounding box is clipped and hidden entirely.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. POSITION -->
+            <section id="position">
+                <h2 class="custom-heading">10. Position</h2>
+                <p>Use these shorthand utilities for quickly configuring the position of an element.</p>
+                <div class="demo-container">
+                    <div class="position-relative p-5 bg-light border" style="height: 200px;">
+                        <div class="position-absolute top-0 start-0 p-2 bg-primary text-white">Top left</div>
+                        <div class="position-absolute top-0 end-0 p-2 bg-success text-white">Top right</div>
+                        <div class="position-absolute top-50 start-50 translate-middle p-2 bg-danger text-white">Perfectly Centered</div>
+                        <div class="position-absolute bottom-0 end-0 p-2 bg-warning text-dark">Bottom right</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. SIZING -->
+            <section id="sizing">
+                <h2 class="custom-heading">11. Sizing</h2>
+                <p>Easily make an element as wide or as tall with width and height utilities.</p>
+                <div class="demo-container bg-light">
+                    <div class="w-25 p-2 bg-primary text-white mb-2">Width 25%</div>
+                    <div class="w-50 p-2 bg-primary text-white mb-2">Width 50%</div>
+                    <div class="w-75 p-2 bg-primary text-white mb-2">Width 75%</div>
+                    <div class="w-100 p-2 bg-primary text-white">Width 100%</div>
+                </div>
+            </section>
+
+            <!-- 12. SPACING -->
+            <section id="spacing">
+                <h2 class="custom-heading">12. Spacing</h2>
+                <p>Assign responsive-friendly margin or padding values to an element or a subset of its sides. Format: <code>{property}{sides}-{size}</code>.</p>
+                <div class="demo-container">
+                    <div class="p-4 bg-primary text-white d-inline-block">p-4 (padding on all sides)</div>
+                    <div class="px-5 bg-success text-white d-inline-block">px-5 (padding left/right)</div>
+                    <div class="pt-3 bg-danger text-white d-inline-block">pt-3 (padding top)</div>
+                    
+                    <div class="mt-4 bg-light border p-2">mt-4 (margin-top: level 4) applied to this box.</div>
+                </div>
+            </section>
+
+            <!-- 13. INTERACTIONS -->
+            <section id="interactions">
+                <h2 class="custom-heading">13. Interactions</h2>
+                <p>Utility classes that change how users interact with contents of a website.</p>
+                <div class="demo-container">
+                    <p class="user-select-all bg-light border p-2">This text will be completely selected when clicked.</p>
+                    <p class="user-select-none bg-light border p-2">This text cannot be highlighted/selected by the user.</p>
+                    <a href="#" class="pe-none" tabindex="-1" aria-disabled="true">This link cannot be clicked (pointer-events: none)</a>
+                </div>
+            </section>
+
+            <!-- 14. TEXT -->
+            <section id="text">
+                <h2 class="custom-heading">14. Text Utilities</h2>
+                <p>Documentation and examples for common text utilities to control alignment, wrapping, weight, and more.</p>
+                <div class="demo-container">
+                    <p class="text-start">Start aligned text on all viewport sizes.</p>
+                    <p class="text-center">Center aligned text on all viewport sizes.</p>
+                    <p class="text-end">End aligned text on all viewport sizes.</p>
+                    
+                    <hr>
+                    <p class="fw-bold">Bold text.</p>
+                    <p class="fst-italic">Italic text.</p>
+                    <p class="text-uppercase">Uppercased text.</p>
+                </div>
+            </section>
+
+            <!-- 15. VERTICAL ALIGN -->
+            <section id="vertical-align">
+                <h2 class="custom-heading">15. Vertical Alignment</h2>
+                <p>Change the vertical alignment of inline, inline-block, inline-table, and table cell elements.</p>
+                <div class="demo-container">
+                    <span class="align-baseline">baseline</span>
+                    <span class="align-top">top</span>
+                    <span class="align-middle">middle</span>
+                    <span class="align-bottom">bottom</span>
+                    <span class="align-text-top">text-top</span>
+                    <span class="align-text-bottom">text-bottom</span>
+                </div>
+            </section>
+
+            <!-- 16. VISIBILITY -->
+            <section id="visibility">
+                <h2 class="custom-heading">16. Visibility</h2>
+                <p>Control the visibility of elements without modifying the display. Invisible elements still take up space in the layout.</p>
+                <div class="demo-container">
+                    <div class="visible p-2 bg-success text-white mb-2">Visible element</div>
+                    <div class="invisible p-2 bg-danger text-white mb-2">Invisible element (Takes up space!)</div>
+                    <div class="visible p-2 bg-primary text-white">Visible element</div>
+                </div>
+            </section>
+
+            <!-- SECTION 17: INTERVIEWS -->
+            <section id="interview">
+                <h2 class="custom-heading">17. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "What does the spacing utility class 'mx-auto' do?", a: "It sets margin-left and margin-right to auto, effectively horizontally centering block-level elements that have a defined width."},
+                            {q: "How does .d-none differ from .invisible?", a: ".d-none applies display: none; which removes the element from the document flow completely. .invisible applies visibility: hidden; which hides the element visually but it still takes up space."},
+                            {q: "Explain the naming convention for spacing utilities.", a: "It follows {property}{sides}-{size}. Property is m (margin) or p (padding). Sides can be t (top), b (bottom), s (start/left), e (end/right), x (horizontal), y (vertical). Size ranges from 0 to 5, or auto."},
+                            {q: "What utility class centers text?", a: ".text-center"},
+                            {q: "How do you make an element perfectly circular?", a: "Use the .rounded-circle border utility class."},
+                            {q: "What does the .pe-none class do?", a: "It applies pointer-events: none, making the element unclickable and causing click events to pass through to the element underneath it."},
+                            {q: "How do you create a flexbox container in Bootstrap?", a: "By applying the .d-flex or .d-inline-flex class to an element."},
+                            {q: "Which flexbox utility centers items vertically?", a: ".align-items-center applied to the flex container."},
+                            {q: "How do you completely remove a shadow from an element that has one by default?", a: "Apply the .shadow-none utility class."},
+                            {q: "What class applies a width of 100%?", a: ".w-100"},
+                            {q: "How do you position an element absolutely to the bottom right of its relative parent?", a: "Use .position-absolute .bottom-0 .end-0."},
+                            {q: "What does the .translate-middle class do?", a: "It applies transform: translate(-50%, -50%), which is used in conjunction with top-50 and start-50 to perfectly center an absolute element."},
+                            {q: "How do you prevent text from wrapping to the next line?", a: "Use the .text-nowrap class."},
+                            {q: "What class sets the background to the theme's warning color?", a: ".bg-warning"},
+                            {q: "How do you clear floats in Bootstrap?", a: "Apply the .clearfix utility class to the parent container of the floated elements."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 18: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">18. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "Which class adds padding on the left and right sides?", opts: ["A) .py-3", "B) .px-3", "C) .pl-3", "D) .pr-3"], ans: "B"},
+                            {q: "To make text bold, use:", opts: ["A) .text-bold", "B) .font-bold", "C) .fw-bold", "D) .bold"], ans: "C"},
+                            {q: "Which class pushes flex items apart to the edges?", opts: ["A) .justify-content-center", "B) .justify-content-between", "C) .align-items-end", "D) .flex-separate"], ans: "B"},
+                            {q: "How to hide an element on all screen sizes?", opts: ["A) .hidden", "B) .invisible", "C) .d-none", "D) .display-null"], ans: "C"},
+                            {q: "Which opacity class sets the element to 50% transparency?", opts: ["A) .opacity-5", "B) .opacity-50", "C) .trans-50", "D) .alpha-50"], ans: "B"},
+                            {q: "What does the 's' stand for in .ms-3?", opts: ["A) Small", "B) Start (Left in LTR)", "C) Space", "D) Side"], ans: "B"},
+                            {q: "Which class adds a pill-shaped border?", opts: ["A) .border-pill", "B) .pill-border", "C) .rounded-pill", "D) .round-all"], ans: "C"},
+                            {q: "To make an element a relative positioning context, use:", opts: ["A) .pos-rel", "B) .position-relative", "C) .relative", "D) .p-relative"], ans: "B"},
+                            {q: "What class prevents users from highlighting text?", opts: ["A) .no-select", "B) .pe-none", "C) .user-select-none", "D) .text-static"], ans: "C"},
+                            {q: "How to set height to 100% of the viewport height?", opts: ["A) .h-100", "B) .vh-100", "C) .height-full", "D) .v-100"], ans: "B"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-warning mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 19: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">19. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>What is the difference between `.w-100` and `.vw-100`?</strong><br>
+                        <em>Answer:</em> `.w-100` makes the element 100% of the width of its *parent container*. `.vw-100` makes the element 100% of the *viewport* (screen) width, regardless of parent size.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Explain what `.d-md-flex` does.</strong><br>
+                        <em>Answer:</em> It applies `display: flex;` only on medium screens (≥768px) and larger. On smaller screens, it will revert to its default display behavior unless specified otherwise.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do you create an absolute centered element over an image?</strong><br>
+                        <em>Answer:</em> Wrap both in a `.position-relative` container. Apply `.position-absolute .top-50 .start-50 .translate-middle` to the overlay element.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why did Bootstrap 5 change `.ml` (margin-left) to `.ms` (margin-start)?</strong><br>
+                        <em>Answer:</em> To support RTL (Right-to-Left) languages natively. "Start" is the left side in English, but the right side in Arabic.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What class would you use to prevent a long URL from breaking the container layout?</strong><br>
+                        <em>Answer:</em> Use `.text-break` to allow the long string of text to wrap and break properly.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 20: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">20. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 1: Spacing Combination</h5>
+                                <p>Write a div that has level 4 padding on the top and bottom, and level 2 margin on the left and right.</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;div class="py-4 mx-2"&gt;...&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 2: Flex Alignment</h5>
+                                <p>Create a flex container that aligns items to the right side (end) horizontally, and centers them vertically.</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <code>&lt;div class="d-flex justify-content-end align-items-center"&gt;...&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 3: Responsive Display</h5>
+                                <p>Make an element hidden on mobile, but display as an inline block on large screens.</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <code>&lt;div class="d-none d-lg-inline-block"&gt;...&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 4: Positioning a Badge</h5>
+                                <p>Write the classes needed to place a red notification badge in the absolute top right corner of a button.</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <pre><code>&lt;button class="position-relative"&gt;
+  &lt;span class="position-absolute top-0 end-0 bg-danger"&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 5: Styling Text</h5>
+                                <p>Style a paragraph to be bold, uppercase, centered, and colored green (success).</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <code>&lt;p class="fw-bold text-uppercase text-center text-success"&gt;...&lt;/p&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 21: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">21. 2 Mini Projects</h2>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Notification Toast UI via Utilities</h4>
+                    <p><strong>Goal:</strong> Build a custom popup using only utility classes (no component classes).</p>
+                    <ul>
+                        <li>Create a container fixed to the bottom right (<code>.position-fixed .bottom-0 .end-0 .p-3</code>).</li>
+                        <li>Inside, create a card-like div using <code>.bg-white .shadow-lg .rounded .border</code>.</li>
+                        <li>Make it 250px wide (you can use an inline style or a custom class, as Bootstrap only has % width utilities natively).</li>
+                        <li>Inside, use flexbox (<code>.d-flex .justify-content-between .align-items-center .border-bottom .p-2</code>) for a header area.</li>
+                        <li>Add a <code>.p-3 .text-muted</code> div for the message body.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Feature Callout Block</h4>
+                    <p><strong>Goal:</strong> Build an attractive marketing block using colors and borders.</p>
+                    <ul>
+                        <li>Create a div with a primary background with 10% opacity (<code>.bg-primary .bg-opacity-10</code>). Note: bg-opacity requires Bootstrap 5.1+.</li>
+                        <li>Give it a solid border on the left side only (<code>.border-start .border-primary .border-5</code>).</li>
+                        <li>Add heavy padding (<code>.p-5</code>).</li>
+                        <li>Inside, use <code>.display-6 .text-primary .fw-bold</code> for a header.</li>
+                        <li>Follow it with a <code>.text-dark .fs-5</code> paragraph.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: Bootstrap Layout Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #1a1d20;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: #198754;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            background-color: #e2e3e5;
+            border: 2px dashed #adb5bd;
+            padding: 15px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .demo-box {
+            background-color: #198754;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #146c43;
+        }
+        .demo-box-light {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #badbcc;
+        }
+        .z-demo {
+            position: relative;
+            height: 200px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+        .z-box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid #198754;
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Module 3: Layout</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#containers">1. Containers</a>
+            <a class="nav-link" href="#gutters">2. Gutters</a>
+            <a class="nav-link" href="#zindex">3. Z-Index Utilities</a>
+            <a class="nav-link" href="#cssgrid">4. CSS Grid System</a>
+            <a class="nav-link" href="#columns">5. Columns Utility</a>
+            <a class="nav-link" href="#interview">6. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">7. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">8. Short Answers</a>
+            <a class="nav-link" href="#exercises">9. Coding Exercises</a>
+            <a class="nav-link" href="#projects">10. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Layout & Structure</h1>
+            <p class="lead text-muted mb-5">Master the foundational elements of Bootstrap 5 layout: Containers, Gutters, Z-index, and the modern CSS Grid.</p>
+
+            <!-- SECTION 1: CONTAINERS -->
+            <section id="containers">
+                <h2>1. Containers</h2>
+                <hr>
+                <p>Containers are the most basic layout element in Bootstrap. They pad the content inside them, and there are three primary types:</p>
+                <ul>
+                    <li><code>.container</code>: Sets a <code>max-width</code> at each responsive breakpoint.</li>
+                    <li><code>.container-fluid</code>: Is <code>width: 100%</code> at all breakpoints.</li>
+                    <li><code>.container-{breakpoint}</code>: Is <code>width: 100%</code> until the specified breakpoint.</li>
+                </ul>
+
+                <h4>Visual Demo</h4>
+                <div class="demo-container container">
+                    .container (Centers and limits width on large screens)
+                </div>
+                <div class="demo-container container-fluid">
+                    .container-fluid (Always spans full width)
+                </div>
+                <div class="demo-container container-md">
+                    .container-md (100% width until md breakpoint, then sets max-width)
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="container"&gt;
+  &lt;!-- Content centered with responsive max-widths --&gt;
+&lt;/div&gt;
+
+&lt;div class="container-fluid"&gt;
+  &lt;!-- Content spanning full viewport width --&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 2: GUTTERS -->
+            <section id="gutters">
+                <h2>2. Gutters</h2>
+                <hr>
+                <p>Gutters are the padding between your columns, used to responsively space and align content in the Bootstrap grid system. They use the <code>g-*</code>, <code>gx-*</code>, and <code>gy-*</code> classes (ranging from 0 to 5).</p>
+                
+                <div class="explanation">
+                    <strong>Gutter Types:</strong><br>
+                    <code>.gx-*</code> controls horizontal spacing.<br>
+                    <code>.gy-*</code> controls vertical spacing.<br>
+                    <code>.g-*</code> controls both horizontal and vertical spacing.
+                </div>
+
+                <h4>Horizontal Gutters (.gx-5)</h4>
+                <div class="container px-0 mb-4">
+                    <div class="row gx-5">
+                        <div class="col"><div class="demo-box">Column 1</div></div>
+                        <div class="col"><div class="demo-box">Column 2</div></div>
+                    </div>
+                </div>
+
+                <h4>Vertical Gutters (.gy-3)</h4>
+                <div class="container px-0 mb-4">
+                    <div class="row gy-3">
+                        <div class="col-6"><div class="demo-box">Col 1</div></div>
+                        <div class="col-6"><div class="demo-box">Col 2</div></div>
+                        <div class="col-6"><div class="demo-box">Col 3</div></div>
+                        <div class="col-6"><div class="demo-box">Col 4</div></div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Both horizontal and vertical gutters of size 4 --&gt;
+&lt;div class="row g-4"&gt;
+    &lt;div class="col-6"&gt;&lt;div class="p-3 border"&gt;Item&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="col-6"&gt;&lt;div class="p-3 border"&gt;Item&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Z-INDEX -->
+            <section id="zindex">
+                <h2>3. Z-Index Utilities</h2>
+                <hr>
+                <p>Bootstrap 5 provides low-level <code>z-index</code> utilities to help control the stacking order of components. The classes range from <code>z-n1</code> (negative 1) to <code>z-3</code>.</p>
+                
+                <h4>Stacking Demo</h4>
+                <div class="z-demo mb-4">
+                    <div class="z-box bg-primary z-3" style="top: 20px; left: 20px;">z-3 (Top)</div>
+                    <div class="z-box bg-danger z-2" style="top: 50px; left: 50px;">z-2</div>
+                    <div class="z-box bg-warning text-dark z-1" style="top: 80px; left: 80px;">z-1</div>
+                    <div class="z-box bg-secondary z-0" style="top: 110px; left: 110px;">z-0 (Bottom)</div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="z-3 position-absolute"&gt;I am on top&lt;/div&gt;
+&lt;div class="z-0 position-absolute"&gt;I am on the bottom&lt;/div&gt;
+&lt;div class="z-n1 position-absolute"&gt;I am behind the parent&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 4: CSS GRID -->
+            <section id="cssgrid">
+                <h2>4. CSS Grid System (Opt-in)</h2>
+                <hr>
+                <p>Bootstrap 5.1 introduced an opt-in CSS Grid layout system. Instead of using <code>.row</code> and <code>.col</code>, you use <code>.grid</code> and <code>.g-col-*</code>.</p>
+                
+                <div class="explanation">
+                    <strong>Why use CSS Grid?</strong><br>
+                    It natively supports 2D layouts (rows AND columns simultaneously), making complex layouts cleaner without deep nesting.
+                </div>
+
+                <h4>CSS Grid Demo</h4>
+                <div class="grid text-center mb-4" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem;">
+                    <div class="g-col-6 demo-box">.g-col-6</div>
+                    <div class="g-col-6 demo-box">.g-col-6</div>
+                    
+                    <div class="g-col-4 demo-box-light">.g-col-4</div>
+                    <div class="g-col-4 demo-box-light">.g-col-4</div>
+                    <div class="g-col-4 demo-box-light">.g-col-4</div>
+                </div>
+
+                <h4>Start and Span (Grid Placement)</h4>
+                <div class="grid text-center mb-4" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem;">
+                    <div class="g-col-3 demo-box">.g-col-3</div>
+                    <div class="g-col-3 g-start-7 demo-box">.g-col-3 .g-start-7</div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Note: Requires setting display: grid or enabling CSS Grid via Sass --&gt;
+&lt;div class="grid"&gt;
+  &lt;div class="g-col-6"&gt;Half width&lt;/div&gt;
+  &lt;div class="g-col-6"&gt;Half width&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 5: COLUMNS UTILITY -->
+            <section id="columns">
+                <h2>5. Columns Utility</h2>
+                <hr>
+                <p>Standalone column utilities can be used to set specific widths independently of the traditional grid container/row setup. You can also force column breaks and manage standalone widths.</p>
+
+                <h4>Forcing new lines (Column Breaks)</h4>
+                <div class="container px-0 mb-4">
+                    <div class="row">
+                        <div class="col-3 demo-box-light">.col-3</div>
+                        <div class="col-3 demo-box-light">.col-3</div>
+                        <!-- Force next columns to a new line -->
+                        <div class="w-100 mb-2"></div>
+                        <div class="col-3 demo-box-light">.col-3</div>
+                        <div class="col-3 demo-box-light">.col-3</div>
+                    </div>
+                </div>
+
+                <h4>Standalone Width Utilities</h4>
+                <div class="w-50 p-3 bg-secondary text-white mb-2">.w-50 (50% width)</div>
+                <div class="w-75 p-3 bg-secondary text-white mb-2">.w-75 (75% width)</div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="row"&gt;
+  &lt;div class="col-6"&gt;Col 1&lt;/div&gt;
+  &lt;div class="col-6"&gt;Col 2&lt;/div&gt;
+  &lt;!-- The w-100 utility forces a break in the flex row --&gt;
+  &lt;div class="w-100"&gt;&lt;/div&gt;
+  &lt;div class="col-6"&gt;Col 3 (New Line)&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+
+            <!-- SECTION 6: INTERVIEWS -->
+            <section id="interview">
+                <h2>6. 15 Interview Questions with Answers</h2>
+                <hr>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "What is the primary difference between .container and .container-fluid?", a: ".container has responsive max-widths at different breakpoints, centering content. .container-fluid is always 100% width of the viewport."},
+                            {q: "What are gutters in Bootstrap?", a: "Gutters are the padding between columns. They are used to align and space out content within the grid."},
+                            {q: "How do you control vertical gutters exclusively?", a: "By applying the .gy-* class (e.g., .gy-3) to the .row container."},
+                            {q: "Can you remove gutters entirely? How?", a: "Yes, by adding the .g-0 class to the .row, which removes both horizontal and vertical padding between columns."},
+                            {q: "What is the purpose of the z-index utilities?", a: "They allow you to easily control the Z-axis stacking order of elements without writing custom CSS. Classes range from z-n1 to z-3."},
+                            {q: "What does the z-n1 class do?", a: "It applies a z-index of -1, placing the element behind its parent or standard static elements."},
+                            {q: "How does Bootstrap's new CSS Grid differ from the standard Flexbox Grid?", a: "The flexbox grid uses .row and .col-*. The CSS Grid uses .grid and .g-col-* and leverages native CSS Grid properties (display: grid) for powerful 2D layouts."},
+                            {q: "How do you define a column spanning 4 slots in the CSS Grid?", a: "Use the class .g-col-4 on the child element inside a .grid container."},
+                            {q: "What does the .g-start-* class do in CSS Grid?", a: "It dictates which grid line the column should start on. For example, .g-start-3 starts the element on the 3rd column line."},
+                            {q: "How can you break columns to a new line without creating a new .row?", a: "By inserting an empty div with the class .w-100 between the columns."},
+                            {q: "Why do we apply gutters to the .row and not the .col?", a: "Because Bootstrap uses negative margins on the .row to offset the padding on the columns, ensuring alignment with the container edge."},
+                            {q: "What breakpoint does .container-lg apply to?", a: "It remains 100% width until the viewport reaches the large (lg) breakpoint (992px), at which point it sets a max-width."},
+                            {q: "Can you use .w-50 inside a grid row?", a: "Yes, width utilities like .w-50 can be used, but generally .col-6 is preferred inside a .row for proper gutter handling."},
+                            {q: "Does z-index work on statically positioned elements?", a: "No, z-index only works on positioned elements (relative, absolute, fixed, or sticky). Bootstrap's z-* utilities don't change position by themselves."},
+                            {q: "What happens if you combine .gx-5 and .gy-2?", a: "The row will have large horizontal spacing (level 5) between columns, but small vertical spacing (level 2) between rows of columns."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 7: MCQs -->
+            <section id="mcq">
+                <h2>7. 10 Multiple Choice Questions (MCQs)</h2>
+                <hr>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "Which container class is 100% wide until the medium breakpoint?", opts: ["A) .container-md", "B) .container", "C) .container-fluid", "D) .col-md-100"], ans: "A"},
+                            {q: "Which class removes all spacing between columns?", opts: ["A) .gx-none", "B) .g-0", "C) .no-gutters", "D) .gutter-0"], ans: "B"},
+                            {q: "What is the highest default z-index utility in Bootstrap 5?", opts: ["A) z-5", "B) z-max", "C) z-3", "D) z-1000"], ans: "C"},
+                            {q: "Which class is used as the wrapper for Bootstrap's CSS Grid system?", opts: ["A) .css-grid", "B) .grid", "C) .row", "D) .g-container"], ans: "B"},
+                            {q: "To make an element span 8 columns in the CSS Grid, you use:", opts: ["A) .col-8", "B) .g-col-8", "C) .grid-span-8", "D) .span-8"], ans: "B"},
+                            {q: "Which class breaks a flexbox row to a new line instantly?", opts: ["A) .w-100", "B) .break", "C) .clear-fix", "D) .new-line"], ans: "A"},
+                            {q: "What CSS property do the .g-* classes manipulate under the hood?", opts: ["A) Margin only", "B) Padding only", "C) A combination of negative margin and padding", "D) Gap property natively (in flex/grid contexts)"], ans: "D"},
+                            {q: "In z-index, what does z-n1 stand for?", opts: ["A) Z-index 1", "B) Z-index Not 1", "C) Z-index Negative 1", "D) Z-index None"], ans: "C"},
+                            {q: "To push a CSS Grid column to start at the 4th line, use:", opts: ["A) .g-push-4", "B) .g-start-4", "C) .offset-4", "D) .grid-start-4"], ans: "B"},
+                            {q: "If you apply .gy-5 to a row, what is affected?", opts: ["A) Only horizontal gaps", "B) Only vertical gaps", "C) Both gaps", "D) Container margins"], ans: "B"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-success mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 8: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2>8. 5 Short Answer Questions</h2>
+                <hr>
+                <ol>
+                    <li class="mb-3">
+                        <strong>Explain when you would use `.container-sm` instead of `.container`.</strong><br>
+                        <em>Answer:</em> Use `.container-sm` when you want the element to be 100% width on extra-small screens, but switch to a fixed max-width layout on small screens (576px) and up.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Describe the visual difference between `.gx-5` and `.gy-5`.</strong><br>
+                        <em>Answer:</em> `.gx-5` adds a large amount of empty space between adjacent columns side-by-side. `.gy-5` adds large space between stacked columns (when they wrap to the next line).
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why must an element have a position applied (e.g., `position-relative`) for `z-3` to work?</strong><br>
+                        <em>Answer:</em> Standard CSS behavior dictates that `z-index` only affects elements that have a position value other than `static` (like relative, absolute, fixed, or sticky).
+                    </li>
+                    <li class="mb-3">
+                        <strong>What is the advantage of CSS Grid (`.grid`) over Flexbox (`.row`) for complex layouts?</strong><br>
+                        <em>Answer:</em> CSS Grid natively handles both rows and columns at once, allowing you to easily dictate column spans and start points without nesting multiple `.row` containers.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How does the `.w-100` utility act as a column break?</strong><br>
+                        <em>Answer:</em> By inserting a div with `.w-100` (which applies `width: 100%`), it forces the flex container to wrap, pushing subsequent columns to the next visual row.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 9: EXERCISES -->
+            <section id="exercises">
+                <h2>9. 5 Coding Exercises</h2>
+                <hr>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 1: Gutter Control</h5>
+                                <p>Write a row containing two columns. Make the horizontal gap between them the maximum size (5), and the vertical gap minimum (1).</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;div class="row gx-5 gy-1"&gt;...&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 2: Responsive Container</h5>
+                                <p>Create a container that is full width on mobile and tablets, but snaps to a fixed width on large (lg) desktop screens.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <code>&lt;div class="container-lg"&gt;...&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 3: Stacking Elements</h5>
+                                <p>Create two absolute positioned divs. Ensure the second div in the HTML appears BEHIND the first div using Bootstrap utilities.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <pre><code>&lt;div class="position-absolute z-2"&gt;Front&lt;/div&gt;
+&lt;div class="position-absolute z-1"&gt;Back&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 4: CSS Grid Setup</h5>
+                                <p>Using Bootstrap's CSS Grid, create a layout with an element that spans 8 columns, and another that spans 4 columns.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <pre><code>&lt;div class="grid"&gt;
+  &lt;div class="g-col-8"&gt;Main&lt;/div&gt;
+  &lt;div class="g-col-4"&gt;Sidebar&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-success">
+                            <div class="card-body">
+                                <h5>Exercise 5: The Column Break</h5>
+                                <p>In a standard flex `.row`, you have three `.col-4` elements. Write the code to force the 3rd element onto a new line.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col-4"&gt;1&lt;/div&gt;
+  &lt;div class="col-4"&gt;2&lt;/div&gt;
+  &lt;div class="w-100"&gt;&lt;/div&gt;
+  &lt;div class="col-4"&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 10: MINI PROJECTS -->
+            <section id="projects">
+                <h2>10. 2 Mini Projects</h2>
+                <hr>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Image Gallery with Gutters</h4>
+                    <p><strong>Goal:</strong> Build a seamless, edge-to-edge photo gallery layout.</p>
+                    <ul>
+                        <li>Use a <code>.container-fluid</code> to touch the edges of the screen.</li>
+                        <li>Use a <code>.row</code> with <code>.g-0</code> to remove all gutters (so images touch each other).</li>
+                        <li>Create 6 columns (<code>.col-6 .col-md-4</code>).</li>
+                        <li>Place a placeholder image inside each column (use <code>w-100</code> on the img tags).</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Overlapping Hero Banner</h4>
+                    <p><strong>Goal:</strong> Create a hero section where a floating text box overlaps an image, utilizing Z-index and Containers.</p>
+                    <ul>
+                        <li>Create an outer wrapper with <code>position-relative</code>.</li>
+                        <li>Add a background image or colored div covering 100% width, set to <code>z-0</code>.</li>
+                        <li>Inside a <code>.container</code>, create a card/box with text.</li>
+                        <li>Apply <code>position-absolute</code>, <code>z-3</code>, and position utilities (like <code>bottom-0 start-50 translate-middle-x</code>) to the card so it floats above the background.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+        
+        <footer class="text-center text-muted mt-5 mb-3">
+            <small>&copy; 2026 Bootstrap Layout Masterclass Tutorial</small>
+        </footer>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>

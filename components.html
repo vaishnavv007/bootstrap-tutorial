@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6: Bootstrap Components Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #20c997; /* Teal for Module 6 */
+            --theme-hover: #1aa179;
+            --theme-light: #d2f4ea;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-color);
+        }
+        .sidebar h6 {
+            color: #6c757d;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-hover);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-3 text-white">Module 6: Components</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <h6 class="px-3 mb-2">Part 1</h6>
+            <a class="nav-link" href="#buttons">1. Buttons</a>
+            <a class="nav-link" href="#button-groups">2. Button Groups</a>
+            <a class="nav-link" href="#alerts">3. Alerts</a>
+            <a class="nav-link" href="#badges">4. Badges</a>
+            <a class="nav-link" href="#breadcrumb">5. Breadcrumb</a>
+            <a class="nav-link" href="#cards">6. Cards</a>
+            <a class="nav-link" href="#carousel">7. Carousel</a>
+            <a class="nav-link" href="#collapse">8. Collapse</a>
+            <a class="nav-link" href="#dropdowns">9. Dropdowns</a>
+            <a class="nav-link" href="#list-group">10. List Group</a>
+            <a class="nav-link" href="#modal">11. Modal</a>
+            
+            <h6 class="px-3 mb-2">Part 2</h6>
+            <a class="nav-link" href="#navbar">12. Navbar</a>
+            <a class="nav-link" href="#navs-tabs">13. Navs & Tabs</a>
+            <a class="nav-link" href="#offcanvas">14. Offcanvas</a>
+            <a class="nav-link" href="#pagination">15. Pagination</a>
+            <a class="nav-link" href="#placeholders">16. Placeholders</a>
+            <a class="nav-link" href="#popovers">17. Popovers</a>
+            <a class="nav-link" href="#progress">18. Progress Bar</a>
+            <a class="nav-link" href="#scrollspy">19. Scrollspy</a>
+            <a class="nav-link" href="#spinners">20. Spinners</a>
+            <a class="nav-link" href="#toasts">21. Toasts</a>
+            <a class="nav-link" href="#tooltips">22. Tooltips</a>
+            
+            <h6 class="px-3 mb-2">Assessments</h6>
+            <a class="nav-link" href="#interview">23. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">24. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">25. Short Answers</a>
+            <a class="nav-link" href="#exercises">26. Coding Exercises</a>
+            <a class="nav-link" href="#projects">27. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Components</h1>
+            <p class="lead text-muted mb-5">Interactive elements and pre-built UI components to rapidly build your interfaces.</p>
+
+            <!-- 1. BUTTONS -->
+            <section id="buttons">
+                <h2 class="custom-heading">1. Buttons</h2>
+                <p>Use Bootstrap's custom button styles for actions in forms, dialogs, and more with support for multiple sizes and states.</p>
+                <div class="demo-container">
+                    <button type="button" class="btn btn-primary">Primary</button>
+                    <button type="button" class="btn btn-secondary">Secondary</button>
+                    <button type="button" class="btn btn-success">Success</button>
+                    <button type="button" class="btn btn-danger">Danger</button>
+                    <button type="button" class="btn btn-warning">Warning</button>
+                    <button type="button" class="btn btn-info">Info</button>
+                    
+                    <hr class="my-4">
+                    <h6>Outline Buttons</h6>
+                    <button type="button" class="btn btn-outline-primary">Primary</button>
+                    <button type="button" class="btn btn-outline-success">Success</button>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Standard Button --&gt;
+&lt;button type="button" class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;!-- Outline Button --&gt;
+&lt;button type="button" class="btn btn-outline-success"&gt;Success&lt;/button&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 2. BUTTON GROUPS -->
+            <section id="button-groups">
+                <h2 class="custom-heading">2. Button Groups</h2>
+                <p>Group a series of buttons together on a single line or stack them in a vertical column.</p>
+                <div class="demo-container">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary">Left</button>
+                        <button type="button" class="btn btn-primary">Middle</button>
+                        <button type="button" class="btn btn-primary">Right</button>
+                    </div>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="btn-group" role="group"&gt;
+  &lt;button type="button" class="btn btn-primary"&gt;Left&lt;/button&gt;
+  &lt;button type="button" class="btn btn-primary"&gt;Middle&lt;/button&gt;
+  &lt;button type="button" class="btn btn-primary"&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3. ALERTS -->
+            <section id="alerts">
+                <h2 class="custom-heading">3. Alerts</h2>
+                <p>Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.</p>
+                <div class="demo-container">
+                    <div class="alert alert-primary" role="alert">
+                        A simple primary alert—check it out!
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Dismissible Alert --&gt;
+&lt;div class="alert alert-success alert-dismissible fade show" role="alert"&gt;
+  Message goes here!
+  &lt;button type="button" class="btn-close" data-bs-dismiss="alert"&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 4. BADGES -->
+            <section id="badges">
+                <h2 class="custom-heading">4. Badges</h2>
+                <p>Documentation and examples for badges, our small count and labeling component.</p>
+                <div class="demo-container">
+                    <h2>Example heading <span class="badge bg-secondary">New</span></h2>
+                    <button type="button" class="btn btn-primary mt-2">
+                        Notifications <span class="badge text-bg-danger">4</span>
+                    </button>
+                    <hr class="my-4">
+                    <h6>Pill Badges</h6>
+                    <span class="badge rounded-pill text-bg-primary">Primary</span>
+                    <span class="badge rounded-pill text-bg-success">Success</span>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;span class="badge rounded-pill text-bg-primary"&gt;Primary&lt;/span&gt;
+&lt;button class="btn btn-primary"&gt;
+  Inbox &lt;span class="badge text-bg-danger"&gt;99+&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 5. BREADCRUMB -->
+            <section id="breadcrumb">
+                <h2 class="custom-heading">5. Breadcrumb</h2>
+                <p>Indicate the current page's location within a navigational hierarchy that automatically adds separators via CSS.</p>
+                <div class="demo-container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Library</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;nav aria-label="breadcrumb"&gt;
+  &lt;ol class="breadcrumb"&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item active" aria-current="page"&gt;Current&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 6. CARDS -->
+            <section id="cards">
+                <h2 class="custom-heading">6. Cards</h2>
+                <p>Cards provide a flexible and extensible content container with multiple variants and options.</p>
+                <div class="demo-container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="card">
+                                <img src="https://picsum.photos/400/200?random=1" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="card" style="width: 18rem;"&gt;
+  &lt;img src="..." class="card-img-top" alt="..."&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Card title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Card content here.&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Button&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 7. CAROUSEL -->
+            <section id="carousel">
+                <h2 class="custom-heading">7. Carousel</h2>
+                <p>A slideshow component for cycling through elements—images or slides of text—like a carousel.</p>
+                <div class="demo-container">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 600px; margin: 0 auto;">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+                        </div>
+                        <div class="carousel-inner rounded">
+                            <div class="carousel-item active">
+                                <img src="https://picsum.photos/600/300?random=2" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://picsum.photos/600/300?random=3" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <strong>Note:</strong> Ensure the <code>data-bs-target</code> attributes on the controls match the <code>id</code> of the <code>.carousel</code> element perfectly.
+                </div>
+            </section>
+
+            <!-- 8. COLLAPSE -->
+            <section id="collapse">
+                <h2 class="custom-heading">8. Collapse</h2>
+                <p>Toggle the visibility of content across your project with a few classes and JavaScript plugins.</p>
+                <div class="demo-container">
+                    <p>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Toggle Content
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                        </div>
+                    </div>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Trigger Button --&gt;
+&lt;button data-bs-toggle="collapse" data-bs-target="#myCollapse" class="btn btn-primary"&gt;
+  Toggle
+&lt;/button&gt;
+&lt;!-- Collapsible Content --&gt;
+&lt;div class="collapse" id="myCollapse"&gt;
+  &lt;div class="card card-body"&gt;Hidden content...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 9. DROPDOWNS -->
+            <section id="dropdowns">
+                <h2 class="custom-heading">9. Dropdowns</h2>
+                <p>Toggle contextual overlays for displaying lists of links and more.</p>
+                <div class="demo-container">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="dropdown"&gt;
+  &lt;button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"&gt;
+    Dropdown
+  &lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 10. LIST GROUP -->
+            <section id="list-group">
+                <h2 class="custom-heading">10. List Group</h2>
+                <p>List groups are a flexible and powerful component for displaying a series of content.</p>
+                <div class="demo-container">
+                    <ul class="list-group" style="max-width: 400px;">
+                        <li class="list-group-item active" aria-current="true">An active item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;ul class="list-group"&gt;
+  &lt;li class="list-group-item active"&gt;Active Item&lt;/li&gt;
+  &lt;li class="list-group-item"&gt;Standard Item&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 11. MODAL -->
+            <section id="modal">
+                <h2 class="custom-heading">11. Modal</h2>
+                <p>Use Bootstrap's JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.</p>
+                <div class="demo-container">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Launch demo modal
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Woohoo, you're reading this text in a modal!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    The modal HTML should ideally be placed right before the closing <code>&lt;/body&gt;</code> tag to avoid z-index and positioning issues with other elements on the page.
+                </div>
+            </section>
+
+           <!-- 12. NAVBAR -->
+            <section id="navbar">
+                <h2 class="custom-heading">12. Navbar</h2>
+                <p>Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for our collapse plugin.</p>
+                <div class="demo-container">
+                    <nav class="navbar navbar-expand-lg bg-body-tertiary rounded">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#">Brand</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Features</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Pricing</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;nav class="navbar navbar-expand-lg bg-light"&gt;
+  &lt;div class="container-fluid"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Logo&lt;/a&gt;
+    &lt;!-- Toggler Button --&gt;
+    &lt;button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navCollapse"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!-- Links --&gt;
+    &lt;div class="collapse navbar-collapse" id="navCollapse"&gt;
+      &lt;ul class="navbar-nav"&gt;
+        &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 13. NAVS & TABS -->
+            <section id="navs-tabs">
+                <h2 class="custom-heading">13. Navs & Tabs</h2>
+                <p>Build navigation components using standard lists. Add the `nav-tabs` class to generate a tabbed interface.</p>
+                <div class="demo-container">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content border border-top-0 p-3 bg-white" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">This is the home tab content.</div>
+                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">This is the profile tab content.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 14. OFFCANVAS -->
+            <section id="offcanvas">
+                <h2 class="custom-heading">14. Offcanvas</h2>
+                <p>Build hidden sidebars into your project for navigation, shopping carts, and more.</p>
+                <div class="demo-container">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        Toggle Offcanvas Sidebar
+                    </button>
+
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas Title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <div>
+                                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 15. PAGINATION -->
+            <section id="pagination">
+                <h2 class="custom-heading">15. Pagination</h2>
+                <p>Indicate a series of related content exists across multiple pages.</p>
+                <div class="demo-container">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination mb-0">
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <!-- 16. PLACEHOLDERS -->
+            <section id="placeholders">
+                <h2 class="custom-heading">16. Placeholders</h2>
+                <p>Use loading placeholders for your components or pages to indicate something may still be loading.</p>
+                <div class="demo-container">
+                    <div class="card" style="width: 18rem;">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
+                        <div class="card-body">
+                            <h5 class="card-title placeholder-glow">
+                                <span class="placeholder col-6"></span>
+                            </h5>
+                            <p class="card-text placeholder-glow">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                            </p>
+                            <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 17. POPOVERS -->
+            <section id="popovers">
+                <h2 class="custom-heading">17. Popovers</h2>
+                <p>Add small overlay content, like those found in iOS, to any element for housing secondary information.</p>
+                <div class="demo-container">
+                    <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+                </div>
+                <div class="explanation">
+                    <strong>Note:</strong> Popovers are opt-in for performance reasons, so you must initialize them yourself with JavaScript (provided at the bottom of this file).
+                </div>
+            </section>
+
+            <!-- 18. PROGRESS BAR -->
+            <section id="progress">
+                <h2 class="custom-heading">18. Progress Bar</h2>
+                <p>Documentation and examples for using Bootstrap custom progress bars featuring support for stacked bars, animated backgrounds, and text labels.</p>
+                <div class="demo-container">
+                    <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: 25%">25%</div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 75%"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 19. SCROLLSPY -->
+            <section id="scrollspy">
+                <h2 class="custom-heading">19. Scrollspy</h2>
+                <p>Automatically update Bootstrap navigation or list group components based on scroll position to indicate which link is currently active in the viewport.</p>
+                <div class="explanation">
+                    <strong>Look to your left!</strong> The sidebar navigation you are using right now to read this tutorial is utilizing the Bootstrap Scrollspy plugin. Notice how the links change color as you scroll down the page!
+                </div>
+            </section>
+
+            <!-- 20. SPINNERS -->
+            <section id="spinners">
+                <h2 class="custom-heading">20. Spinners</h2>
+                <p>Indicate the loading state of a component or page with Bootstrap spinners, built entirely with HTML, CSS, and no JavaScript.</p>
+                <div class="demo-container">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success ms-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    
+                    <hr class="my-4">
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span class="visually-hidden" role="status">Loading...</span>
+                    </button>
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span role="status">Loading...</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 21. TOASTS -->
+            <section id="toasts">
+                <h2 class="custom-heading">21. Toasts</h2>
+                <p>Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.</p>
+                <div class="demo-container">
+                    <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <strong class="me-auto">Bootstrap</strong>
+                                <small>11 mins ago</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                Hello, world! This is a toast message.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 22. TOOLTIPS -->
+            <section id="tooltips">
+                <h2 class="custom-heading">22. Tooltips</h2>
+                <p>Custom tooltips for local title storage via custom data attributes.</p>
+                <div class="demo-container">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">
+                        Tooltip on top
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
+                        Tooltip on right
+                    </button>
+                </div>
+                <div class="explanation">
+                    <strong>Note:</strong> Like popovers, Tooltips are opt-in and require JavaScript initialization.
+                </div>
+            </section>
+
+
+            <!-- SECTION 23: INTERVIEWS -->
+            <section id="interview">
+                <h2 class="custom-heading">23. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "What is the difference between a Collapse and an Offcanvas?", a: "Collapse hides/shows content within the normal document flow (like an accordion). Offcanvas creates a hidden sidebar that slides in over the page content from the viewport edges."},
+                            {q: "Why do Popovers and Tooltips require custom JavaScript to work?", a: "For performance reasons, Bootstrap does not initialize them automatically. They rely on a third-party library called Popper.js for positioning, which must be manually instantiated."},
+                            {q: "How do you make a Bootstrap button look like a link?", a: "Use the .btn-link class. It removes the button styling but keeps standard button behavior."},
+                            {q: "What is the purpose of the 'data-bs-toggle' attribute?", a: "It tells Bootstrap's JavaScript which plugin to invoke for a specific element (e.g., data-bs-toggle='modal' triggers a modal)."},
+                            {q: "How do you center an image inside a Bootstrap Card?", a: "You can apply standard text alignment utilities like .text-center to the .card-body, or margin utilities like .mx-auto to the image itself."},
+                            {q: "What class makes a Progress bar striped?", a: "The .progress-bar-striped class applied to the inner .progress-bar div."},
+                            {q: "How do you disable a dropdown item?", a: "Add the .disabled class to the <a> or <button> tag inside the dropdown menu."},
+                            {q: "What does Scrollspy do?", a: "It automatically updates nav targets based on scroll position, highlighting the active link that corresponds to the section currently visible in the viewport."},
+                            {q: "What is a Placeholders component used for?", a: "It is used to display a temporary 'skeleton' UI while the actual content (like data from an API) is loading, improving perceived performance."},
+                            {q: "How do you align a Navbar to the right?", a: "You can use margin utilities. In Bootstrap 5, applying .ms-auto (margin-start auto) to the navbar-nav will push it to the right."},
+                            {q: "How do you make a Toast message auto-hide after 5 seconds?", a: "By default, toasts auto-hide after 5 seconds. You can change this using the data-bs-delay attribute (e.g., data-bs-delay='5000')."},
+                            {q: "What is the difference between .spinner-border and .spinner-grow?", a: ".spinner-border creates a classic rotating circular ring, while .spinner-grow creates a pulsing, scaling circle."},
+                            {q: "Can you put a form inside a Modal?", a: "Yes, Modals can contain almost any HTML, including complex forms, grids, and other Bootstrap components."},
+                            {q: "What class is required to make a Carousel transition fade instead of slide?", a: "Add the .carousel-fade class to the main .carousel container."},
+                            {q: "How do you make an Alert dismissible?", a: "Add the .alert-dismissible class to the alert container, and include a button with class .btn-close and data-bs-dismiss='alert' inside it."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 24: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">24. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "Which attribute tells a button to open a specific Modal?", opts: ["A) data-modal-id", "B) data-bs-target", "C) href", "D) data-open"], ans: "B"},
+                            {q: "Which class provides a pill-shaped badge?", opts: ["A) .badge-pill", "B) .rounded-pill", "C) .badge-round", "D) .pill"], ans: "B"},
+                            {q: "What third-party library do Tooltips and Popovers rely on?", opts: ["A) jQuery", "B) React", "C) Popper.js", "D) Vue"], ans: "C"},
+                            {q: "How do you make a navbar collapse on small screens?", opts: ["A) .navbar-expand-lg", "B) .navbar-collapse", "C) .navbar-responsive", "D) .nav-hide"], ans: "A"},
+                            {q: "What is the wrapper class for a Bootstrap card?", opts: ["A) .card-container", "B) .card-wrapper", "C) .card", "D) .panel"], ans: "C"},
+                            {q: "To make a List Group item look active, use:", opts: ["A) .is-active", "B) .active", "C) .list-group-active", "D) .selected"], ans: "B"},
+                            {q: "Which element acts as the visual 'loading' animation?", opts: ["A) .spinner-border", "B) .loader", "C) .progress-circle", "D) .loading-icon"], ans: "A"},
+                            {q: "What class makes a progress bar animated?", opts: ["A) .progress-animated", "B) .progress-bar-animated", "C) .animate", "D) .progress-move"], ans: "B"},
+                            {q: "Which component is best for showing a non-intrusive 'Saved successfully' notification?", opts: ["A) Modal", "B) Jumbotron", "C) Toast", "D) Carousel"], ans: "C"},
+                            {q: "In an Offcanvas, what class controls where it slides in from (e.g., from the left)?", opts: ["A) .offcanvas-left", "B) .offcanvas-start", "C) .slide-left", "D) .offcanvas-show"], ans: "B"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-primary mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 25: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">25. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>Explain the basic HTML structure of a Card component.</strong><br>
+                        <em>Answer:</em> A wrapper div with `.card`, containing optional `.card-img-top`, followed by `.card-body`, which contains `.card-title` and `.card-text`.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why did Bootstrap 5 drop jQuery for its components?</strong><br>
+                        <em>Answer:</em> To improve performance, reduce file sizes, and modernize the framework by using vanilla JavaScript features that are now widely supported across modern browsers.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do you trigger a Toast notification using JavaScript?</strong><br>
+                        <em>Answer:</em> You select the toast element via DOM, instantiate a new Bootstrap Toast object `new bootstrap.Toast(element)`, and call `.show()` on it.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What is the difference between an Alert and a Badge?</strong><br>
+                        <em>Answer:</em> Alerts are block-level feedback messages that span the width of their container and can be dismissed. Badges are small, inline labels usually used for counts (like unread messages) or tags.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What is the role of `.navbar-toggler`?</strong><br>
+                        <em>Answer:</em> It is the button (often displaying a "hamburger" menu icon) that appears on smaller screens to toggle the visibility of the collapsed navbar links.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 26: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">26. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 1: Ghost Button</h5>
+                                <p>Create a danger button that has a transparent background (outline) until hovered.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;button class="btn btn-outline-danger"&gt;Delete&lt;/button&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 2: Badge inside Button</h5>
+                                <p>Create a primary button that says "Messages" and contains a light badge indicating "4" new messages.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <code>&lt;button class="btn btn-primary"&gt;Messages &lt;span class="badge text-bg-light"&gt;4&lt;/span&gt;&lt;/button&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 3: Centered Pagination</h5>
+                                <p>Write the code for a basic 3-page pagination and use a flex utility class to center it horizontally.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <pre><code>&lt;ul class="pagination justify-content-center"&gt;
+  &lt;li class="page-item"&gt;&lt;a class="page-link"&gt;1&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="page-item"&gt;&lt;a class="page-link"&gt;2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 4: Dismissible Alert</h5>
+                                <p>Create a warning alert that says "Low Battery" and includes a close button.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <pre><code>&lt;div class="alert alert-warning alert-dismissible"&gt;
+  Low Battery
+  &lt;button class="btn-close" data-bs-dismiss="alert"&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 5: Basic Modal Button</h5>
+                                <p>Write ONLY the button tag needed to trigger a modal that has the ID <code>#loginModal</code>.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <code>&lt;button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal"&gt;Login&lt;/button&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 27: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">27. 2 Mini Projects</h2>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Product Pricing Cards</h4>
+                    <p><strong>Goal:</strong> Build a 3-tier pricing section using Grid and Cards.</p>
+                    <ul>
+                        <li>Create a container and row with 3 columns (lg-4).</li>
+                        <li>Inside each, place a `.card` with `text-center`.</li>
+                        <li>In the card-body, add a `.card-title` for the tier (Basic, Pro, Max).</li>
+                        <li>Add a display heading (e.g., `.display-4`) for the price.</li>
+                        <li>Use a `.list-group.list-group-flush` for the feature list.</li>
+                        <li>Place a `.btn.btn-primary.w-100` at the bottom to purchase.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Interactive Navbar & Offcanvas</h4>
+                    <p><strong>Goal:</strong> Build a hybrid navigation system.</p>
+                    <ul>
+                        <li>Create a `.navbar` that expands on `lg` screens.</li>
+                        <li>Include a branding logo.</li>
+                        <li>Instead of a standard collapse, configure the `.navbar-toggler` button to trigger an `.offcanvas-end` sidebar when clicked on mobile.</li>
+                        <li>Place your navigation links inside the Offcanvas body. On desktop, they will appear in the navbar, and on mobile, they slide in from the right.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Syntax Highlighting
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+
+            // Initialize Tooltips
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+            // Initialize Popovers
+            const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+            const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
+            // Initialize Live Toast demo
+            const toastTrigger = document.getElementById('liveToastBtn');
+            const toastLiveExample = document.getElementById('liveToast');
+            if (toastTrigger) {
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+                toastTrigger.addEventListener('click', () => {
+                    toastBootstrap.show();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

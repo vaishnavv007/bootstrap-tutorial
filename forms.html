@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5: Bootstrap Forms Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #0d6efd; /* Primary Blue for Module 5 */
+            --theme-hover: #0b5ed7;
+            --theme-light: #cfe2ff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-color);
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-color);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Module 5: Forms</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#basics">1. Form Basics & Inputs</a>
+            <a class="nav-link" href="#select">2. Select Menu</a>
+            <a class="nav-link" href="#checks">3. Checks & Radios</a>
+            <a class="nav-link" href="#switches">4. Switches</a>
+            <a class="nav-link" href="#range">5. Range Slider</a>
+            <a class="nav-link" href="#input-groups">6. Input Groups</a>
+            <a class="nav-link" href="#floating">7. Floating Labels</a>
+            <a class="nav-link" href="#validation">8. Form Validation</a>
+            <a class="nav-link" href="#interview">9. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">10. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">11. Short Answers</a>
+            <a class="nav-link" href="#exercises">12. Coding Exercises</a>
+            <a class="nav-link" href="#projects">13. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Form Controls</h1>
+            <p class="lead text-muted mb-5">Learn how to build, style, and validate forms using Bootstrap 5's comprehensive set of form control classes.</p>
+
+            <!-- SECTION 1: BASICS & INPUTS -->
+            <section id="basics">
+                <h2 class="custom-heading">1. Form Basics, Inputs & Labels</h2>
+                <p>Bootstrap styles textual form controls like <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> with the <code>.form-control</code> class. Labels use the <code>.form-label</code> class. Use margin utilities like <code>.mb-3</code> to space out form groups.</p>
+                
+                <div class="demo-container">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="name@example.com">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleTextarea" class="form-label">Message</label>
+                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Enter your message"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledInput" class="form-label">Disabled input</label>
+                            <input type="text" id="disabledInput" class="form-control" placeholder="Disabled input" disabled>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="mb-3"&gt;
+  &lt;label for="exampleInput" class="form-label"&gt;Email address&lt;/label&gt;
+  &lt;input type="email" class="form-control" id="exampleInput" placeholder="name@example.com"&gt;
+  &lt;div class="form-text"&gt;Helpful text goes here.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 2: SELECT MENU -->
+            <section id="select">
+                <h2 class="custom-heading">2. Select Menu</h2>
+                <p>Custom <code>&lt;select&gt;</code> menus need only the <code>.form-select</code> class to trigger custom styles.</p>
+                
+                <div class="demo-container">
+                    <select class="form-select mb-3" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                        <option selected>Large select (.form-select-lg)</option>
+                    </select>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;select class="form-select" aria-label="Default select"&gt;
+  &lt;option selected&gt;Open this select menu&lt;/option&gt;
+  &lt;option value="1"&gt;One&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 3: CHECKS & RADIOS -->
+            <section id="checks">
+                <h2 class="custom-heading">3. Checkboxes & Radio Buttons</h2>
+                <p>Each checkbox or radio button should be wrapped in a <code>.form-check</code> div to ensure proper margins and label alignment. The inputs take <code>.form-check-input</code> and labels take <code>.form-check-label</code>.</p>
+                
+                <div class="demo-container">
+                    <h5>Checkboxes</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">Checked checkbox</label>
+                    </div>
+
+                    <h5>Radio Buttons</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadio1">
+                        <label class="form-check-label" for="flexRadio1">Default radio</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadio2" checked>
+                        <label class="form-check-label" for="flexRadio2">Checked radio</label>
+                    </div>
+                </div>
+
+<pre><code class="language-html">&lt;div class="form-check"&gt;
+  &lt;input class="form-check-input" type="checkbox" id="check1"&gt;
+  &lt;label class="form-check-label" for="check1"&gt;Label&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- SECTION 4: SWITCHES -->
+            <section id="switches">
+                <h2 class="custom-heading">4. Switches</h2>
+                <p>A switch has the markup of a custom checkbox but uses the <code>.form-switch</code> modifier class on the wrapper to render a toggle switch.</p>
+                
+                <div class="demo-container">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+                    </div>
+                </div>
+
+<pre><code class="language-html">&lt;div class="form-check form-switch"&gt;
+  &lt;input class="form-check-input" type="checkbox" role="switch" id="switch1"&gt;
+  &lt;label class="form-check-label" for="switch1"&gt;Toggle Switch&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- SECTION 5: RANGE SLIDER -->
+            <section id="range">
+                <h2 class="custom-heading">5. Range Slider</h2>
+                <p>Use <code>.form-range</code> on <code>&lt;input type="range"&gt;</code> for consistent cross-browser styling of range inputs.</p>
+                
+                <div class="demo-container">
+                    <label for="customRange1" class="form-label">Example range</label>
+                    <input type="range" class="form-range" id="customRange1">
+                </div>
+
+<pre><code class="language-html">&lt;label for="range1" class="form-label"&gt;Select Volume&lt;/label&gt;
+&lt;input type="range" class="form-range" id="range1"&gt;</code></pre>
+            </section>
+
+
+            <!-- SECTION 6: INPUT GROUPS -->
+            <section id="input-groups">
+                <h2 class="custom-heading">6. Input Groups</h2>
+                <p>Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs using <code>.input-group</code>.</p>
+                
+                <div class="demo-container">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username">
+                        <span class="input-group-text">@example.com</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-text">.00</span>
+                    </div>
+
+                    <div class="input-group">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">Search</button>
+                        <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon">
+                    </div>
+                </div>
+
+<pre><code class="language-html">&lt;div class="input-group mb-3"&gt;
+  &lt;span class="input-group-text"&gt;$&lt;/span&gt;
+  &lt;input type="text" class="form-control" aria-label="Amount"&gt;
+  &lt;span class="input-group-text"&gt;.00&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- SECTION 7: FLOATING LABELS -->
+            <section id="floating">
+                <h2 class="custom-heading">7. Floating Labels</h2>
+                <p>Create beautiful, animated floating labels that hover inside the input field. Wrap a pair of <code>&lt;input class="form-control"&gt;</code> and <code>&lt;label&gt;</code> inside a <code>.form-floating</code> container. <strong>Note:</strong> The <code>&lt;input&gt;</code> must come first, and it must have a placeholder attribute for the CSS to work properly.</p>
+                
+                <div class="demo-container">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                </div>
+
+                <div class="explanation">
+                    <strong>Important:</strong> The <code>placeholder</code> attribute is required on the input element for the floating animation to trigger via CSS <code>:placeholder-shown</code> pseudo-class, even if you want the placeholder to be invisible.
+                </div>
+
+<pre><code class="language-html">&lt;div class="form-floating mb-3"&gt;
+  &lt;input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"&gt;
+  &lt;label for="floatingEmail"&gt;Email address&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <!-- SECTION 8: FORM VALIDATION -->
+            <section id="validation">
+                <h2 class="custom-heading">8. Form Validation</h2>
+                <p>Bootstrap provides styles for valid and invalid form states. Add <code>novalidate</code> to your form, handle the submission with custom JS, and add the <code>.was-validated</code> class to the form. You can also use <code>.is-valid</code> and <code>.is-invalid</code> classes manually.</p>
+                
+                <div class="demo-container">
+                    <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-6">
+                            <label for="validationCustom01" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustomUsername" class="form-label">Username</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text"Here is a complete, well-commented HTML document designed specifically for teaching. 
+
+I have structured it with clear sections (`<fieldset>`) for each topic. Since concepts like **Switches**, **Input Groups**, and **Floating Labels** require CSS to work visually, I have included a lightweight `<style>` section in the `<head>` so you can copy, paste, and demonstrate a fully working page immediately.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 - Forms Teaching Guide</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        fieldset {
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        legend {
+            background: #007bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        /* 1. Input Groups CSS */
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+        .input-group-text {
+            background: #eee;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+        }
+        .input-group input {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* 2. Switch CSS (Styling a checkbox to look like a toggle) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #2196F3; }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        /* 3. Floating Label CSS */
+        .floating-label-group {
+            position: relative;
+            margin-top: 20px;
+        }
+        .floating-label-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .floating-label-group label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 5px;
+            color: #999;
+            transition: 0.2s ease all;
+            pointer-events: none;
+        }
+        /* When input is focused or has valid data, float the label up */
+        .floating-label-group input:focus ~ label,
+        .floating-label-group input:valid ~ label {
+            top: 0;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        /* General Input Styling */
+        input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Module 5: HTML Forms</h1>
+    <p>This document demonstrates various form controls, structural groupings, and HTML5 validation techniques.</p>
+
+    <!-- FORM BASICS -->
+    <form action="/submit-endpoint" method="POST">
+        
+        <!-- INPUT FIELDS & LABELS -->
+        <fieldset>
+            <legend>1. Basics, Input Fields & Labels</legend>
+            <div class="form-group">
+                <!-- The 'for' attribute links the label to the input's 'id' -->
+                <label for="firstName">First Name (Text Input):</label>
+                <input type="text" id="firstName" name="first_name" placeholder="Enter your first name">
+            </div>
+            <div class="form-group">
+                <label for="userPassword">Password (Password Input):</label>
+                <input type="password" id="userPassword" name="password" placeholder="Enter password">
+            </div>
+        </fieldset>
+
+        <!-- SELECT MENU -->
+        <fieldset>
+            <legend>2. Select Menu</legend>
+            <div class="form-group">
+                <label for="countrySelect">Choose your Country:</label>
+                <select id="countrySelect" name="country">
+                    <option value="">-- Select a Country --</option>
+                    <option value="usa">United States</option>
+                    <option value="ind">India</option>
+                    <option value="uk">United Kingdom</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <!-- CHECKBOXES & RADIO BUTTONS -->
+        <fieldset>
+            <legend>3. Checkboxes & Radio Buttons</legend>
+            <div class="form-group">
+                <p><strong>Hobbies (Checkboxes - Multiple Choice):</strong></p>
+                <input type="checkbox" id="hobbyCoding" name="hobbies" value="coding">
+                <label for="hobbyCoding" style="display:inline;">Coding</label> <br>
+                <input type="checkbox" id="hobbyReading" name="hobbies" value="reading">
+                <label for="hobbyReading" style="display:inline;">Reading</label>
+            </div>
+
+            <div class="form-group">
+                <p><strong>Subscription Tier (Radio Buttons - Single Choice):</strong></p>
+                <!-- Radio buttons share the same 'name' to group them together -->
+                <input type="radio" id="tierFree" name="subscription" value="free" checked>
+                <label for="tierFree" style="display:inline;">Free</label> <br>
+                <input type="radio" id="tierPro" name="subscription" value="pro">
+                <label for="tierPro" style="display:inline;">Pro</label>
+            </div>
+        </fieldset>
+
+        <!-- SWITCHES & RANGE SLIDER -->
+        <fieldset>
+            <legend>4. Switches & Range Slider</legend>
+            
+            <div class="form-group">
+                <p><strong>Enable Notifications (Switch):</strong></p>
+                <!-- A switch is just a checkbox styled with CSS -->
+                <label class="switch">
+                    <input type="checkbox" name="notifications">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="volumeControl"><strong>Volume (Range Slider):</strong></label>
+                <input type="range" id="volumeControl" name="volume" min="0" max="100" value="50">
+            </div>
+        </fieldset>
+
+        <!-- INPUT GROUPS & FLOATING LABELS -->
+        <fieldset>
+            <legend>5. Advanced UI: Input Groups & Floating Labels</legend>
+            
+            <div class="form-group">
+                <label>Social Handle (Input Group):</label>
+                <!-- Grouping an icon/text with the input field -->
+                <div class="input-group">
+                    <span class="input-group-text">@</span>
+                    <input type="text" name="username" placeholder="username">
+                </div>
+            </div>
+
+            <!-- Floating labels rely on the 'required' attribute to detect if the field is empty in CSS -->
+            <div class="floating-label-group">
+                <input type="email" id="floatEmail" name="email" required>
+                <label for="floatEmail">Floating Email Label</label>
+            </div>
+        </fieldset>
+
+        <!-- FORM VALIDATION -->
+        <fieldset>
+            <legend>6. HTML5 Form Validation</legend>
+            <p><em>Try submitting without filling these out to see native browser validation.</em></p>
+            
+            <div class="form-group">
+                <label for="ageInput">Age (Required, Min 18, Max 99):</label>
+                <input type="number" id="ageInput" name="age" required min="18" max="99">
+            </div>
+
+            <div class="form-group">
+                <label for="zipCode">Zip Code (Regex Pattern - exactly 5 digits):</label>
+                <input type="text" id="zipCode" name="zipcode" required pattern="[0-9]{5}" title="Five digit zip code">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Submit Form
+                </button>
+            </div>
+        </fieldset>
+
+    </form>
+
+</body>
+</html>

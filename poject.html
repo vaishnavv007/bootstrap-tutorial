@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 12: Bootstrap Projects Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #ffc107; /* Gold/Warning for Module 12 */
+            --theme-hover: #e0a800;
+            --theme-light: #fff3cd;
+            --text-dark: #212529;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: var(--text-dark);
+            background-color: var(--theme-color);
+        }
+        .sidebar h6 {
+            color: #6c757d;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-hover);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .blueprint-list li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-warning">Module 12: Projects</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <h6 class="px-3 mb-2">Project Blueprints</h6>
+            <a class="nav-link" href="#landing">1. Landing Page</a>
+            <a class="nav-link" href="#portfolio">2. Portfolio</a>
+            <a class="nav-link" href="#restaurant">3. Restaurant</a>
+            <a class="nav-link" href="#ecommerce">4. E-commerce</a>
+            <a class="nav-link" href="#dashboard">5. Admin Dashboard</a>
+            <a class="nav-link" href="#auth">6. Login & Register</a>
+            <a class="nav-link" href="#pricing">7. Pricing Page</a>
+            <a class="nav-link" href="#blog">8. Blog Layout</a>
+            <a class="nav-link" href="#final">9. Final Project</a>
+            
+            <h6 class="px-3 mt-4 mb-2 text-muted text-uppercase" style="font-size:0.8rem">Assessments</h6>
+            <a class="nav-link" href="#interview">10. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">11. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">12. Short Answers</a>
+            <a class="nav-link" href="#exercises">13. Coding Exercises</a>
+            <a class="nav-link" href="#projects">14. Final Project Extensions</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Capstone Projects</h1>
+            <p class="lead text-muted mb-5">Bring together everything you've learned. These project blueprints provide the structure, components, and code skeletons to build 10 real-world responsive websites.</p>
+
+            <!-- 1. LANDING PAGE -->
+            <section id="landing">
+                <h2 class="custom-heading">1. Responsive Landing Page</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> Create a high-converting single-page landing site for an app or service.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><code>.navbar.fixed-top</code> for sticky navigation.</li>
+                        <li><strong>Hero Section:</strong> <code>.container</code>, <code>.display-5</code>, <code>.lead</code>, and dual Call-to-Action <code>.btn</code>s.</li>
+                        <li><strong>Features:</strong> 3-column grid (<code>.col-md-4</code>) with Bootstrap Icons (<code>.bi</code>).</li>
+                        <li><strong>Footer:</strong> Simple text-center block with copyright.</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Hero Section Skeleton --&gt;
+&lt;header class="bg-dark text-white text-center py-5"&gt;
+    &lt;div class="container px-5"&gt;
+        &lt;h1 class="display-4 fw-bolder"&gt;Welcome to Our Product&lt;/h1&gt;
+        &lt;p class="lead fw-normal text-white-50 mb-4"&gt;Quickly build stunning layouts using Bootstrap 5.&lt;/p&gt;
+        &lt;a class="btn btn-warning btn-lg px-4 me-sm-3" href="#features"&gt;Get Started&lt;/a&gt;
+        &lt;a class="btn btn-outline-light btn-lg px-4" href="#about"&gt;Learn More&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;!-- Features Grid Skeleton --&gt;
+&lt;section id="features" class="py-5"&gt;
+    &lt;div class="container"&gt;
+        &lt;div class="row gx-5"&gt;
+            &lt;div class="col-lg-4 mb-5"&gt;
+                &lt;div class="feature bg-warning bg-gradient text-dark rounded-3 mb-3 p-3 d-inline-block"&gt;
+                    &lt;i class="bi bi-collection fs-3"&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h2 class="h4"&gt;Feature One&lt;/h2&gt;
+                &lt;p&gt;Paragraph of text beneath the heading to explain the heading.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;!-- Repeat col-lg-4 x2 --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 2. PORTFOLIO -->
+            <section id="portfolio">
+                <h2 class="custom-heading">2. Personal Portfolio Website</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> A professional resume/portfolio site to showcase your projects and skills.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>Navigation:</strong> <code>.navbar</code> with <code>Scrollspy</code> attached to highlight current section.</li>
+                        <li><strong>About Me:</strong> 2-column grid (<code>.col-md-4</code> image, <code>.col-md-8</code> bio).</li>
+                        <li><strong>Projects Gallery:</strong> <code>.card</code> components inside a responsive grid (<code>.col-sm-6 .col-lg-4</code>).</li>
+                        <li><strong>Contact:</strong> <code>.form-control</code> and <code>.form-floating</code> inputs.</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Projects Gallery Skeleton --&gt;
+&lt;section id="portfolio" class="py-5 bg-light"&gt;
+    &lt;div class="container"&gt;
+        &lt;h2 class="text-center mb-5"&gt;My Work&lt;/h2&gt;
+        &lt;div class="row g-4"&gt;
+            &lt;div class="col-md-6 col-lg-4"&gt;
+                &lt;div class="card h-100 shadow-sm"&gt;
+                    &lt;img src="project1.jpg" class="card-img-top" alt="Project 1"&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;h5 class="card-title"&gt;Project Title&lt;/h5&gt;
+                        &lt;p class="card-text"&gt;Short description of the project.&lt;/p&gt;
+                        &lt;a href="#" class="btn btn-outline-warning stretched-link"&gt;View Project&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3. RESTAURANT -->
+            <section id="restaurant">
+                <h2 class="custom-heading">3. Restaurant Website</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> A mouth-watering local business site with a menu and reservation system.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>Header:</strong> <code>.carousel</code> with sliding images of food and a text overlay.</li>
+                        <li><strong>Menu:</strong> <code>.nav-tabs</code> to separate categories (Breakfast, Lunch, Dinner). Inside tabs, use <code>.list-group</code>.</li>
+                        <li><strong>Reservation:</strong> HTML5 validated form (<code>.needs-validation</code>).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 4. E-COMMERCE -->
+            <section id="ecommerce">
+                <h2 class="custom-heading">4. E-commerce Homepage</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> A modern storefront layout with product grids and shopping cart UI.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>Navbar:</strong> Search bar (<code>.input-group</code>) and a Cart button with a <code>.badge</code> for item count.</li>
+                        <li><strong>Promo Banner:</strong> <code>.alert.alert-warning.text-center</code>.</li>
+                        <li><strong>Products:</strong> 4-column grid (<code>.col-md-3</code>). Cards with product images, prices, and <code>.btn-primary</code> "Add to Cart" buttons.</li>
+                        <li><strong>Quick View:</strong> <code>.modal</code> triggered by clicking a product image.</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Navbar with Search and Cart Badge --&gt;
+&lt;nav class="navbar navbar-expand-lg bg-light"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;ShopStart&lt;/a&gt;
+    &lt;form class="d-flex mx-auto w-50"&gt;
+        &lt;input class="form-control me-2" type="search" placeholder="Search products..."&gt;
+        &lt;button class="btn btn-outline-dark" type="submit"&gt;Search&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;button class="btn btn-outline-dark"&gt;
+        &lt;i class="bi bi-cart-fill me-1"&gt;&lt;/i&gt; Cart
+        &lt;span class="badge bg-dark text-white ms-1 rounded-pill"&gt;3&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 5. DASHBOARD -->
+            <section id="dashboard">
+                <h2 class="custom-heading">5. Admin Dashboard</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> A complex, data-heavy layout typical of web application backends.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>Layout:</strong> Use a `.row` where `.col-md-2` is a sidebar (using `.nav.flex-column`) and `.col-md-10` is the main content.</li>
+                        <li><strong>Top Navbar:</strong> Profile <code>.dropdown</code>.</li>
+                        <li><strong>KPI Cards:</strong> 4 grid items at the top with numbers and small charts (use <code>.text-bg-*</code> colored cards).</li>
+                        <li><strong>Data Table:</strong> <code>.table.table-striped.table-hover.table-bordered</code> wrapped in a <code>.table-responsive</code> div.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 6. AUTH -->
+            <section id="auth">
+                <h2 class="custom-heading">6. Login & Registration Pages</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> Clean, highly focused authentication screens.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>Layout:</strong> <code>.d-flex.align-items-center.justify-content-center.vh-100.bg-light</code> to perfectly center the form vertically and horizontally.</li>
+                        <li><strong>Container:</strong> A `.card` with `max-width: 400px;` and `.shadow-lg`.</li>
+                        <li><strong>Inputs:</strong> Use <code>.form-floating</code> for modern, animated labels inside the input fields.</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Centered Login Form Skeleton --&gt;
+&lt;div class="d-flex align-items-center justify-content-center vh-100 bg-light"&gt;
+    &lt;div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;"&gt;
+        &lt;h3 class="text-center mb-4"&gt;Sign In&lt;/h3&gt;
+        &lt;form&gt;
+            &lt;div class="form-floating mb-3"&gt;
+                &lt;input type="email" class="form-control" id="floatEmail" placeholder="name@example.com"&gt;
+                &lt;label for="floatEmail"&gt;Email address&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="form-floating mb-3"&gt;
+                &lt;input type="password" class="form-control" id="floatPass" placeholder="Password"&gt;
+                &lt;label for="floatPass"&gt;Password&lt;/label&gt;
+            &lt;/div&gt;
+            &lt;button class="btn btn-warning w-100 py-2" type="submit"&gt;Sign In&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 7. PRICING -->
+            <section id="pricing">
+                <h2 class="custom-heading">7. Pricing Page</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> A standard SaaS pricing tier page with clear feature comparison.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>Header:</strong> Centered text explaining the pricing model.</li>
+                        <li><strong>Pricing Cards:</strong> 3 `.col-md-4` columns. Use <code>.card</code> with <code>.card-header</code> for the tier name.</li>
+                        <li><strong>Highlight:</strong> Make the middle (Pro) tier stand out using a different border (<code>.border-warning</code>) and a solid button, while the others use <code>.btn-outline-warning</code>.</li>
+                        <li><strong>Comparison Table:</strong> Below the cards, a comprehensive <code>.table</code> detailing feature limits.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 8. BLOG -->
+            <section id="blog">
+                <h2 class="custom-heading">8. Blog Layout</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> A content-focused layout mimicking a traditional news or blog site.
+                </div>
+                <div class="demo-container">
+                    <h5>Required Components:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>Featured Post:</strong> A large, full-width <code>.p-4.p-md-5.mb-4.rounded.text-bg-dark</code> block containing a title and excerpt.</li>
+                        <li><strong>Main Layout:</strong> A `.row` split into `.col-md-8` (Main Content) and `.col-md-4` (Sidebar).</li>
+                        <li><strong>Main Content:</strong> Multiple blog posts separated by <code>&lt;hr&gt;</code>. Use standard typography (<code>.h2</code>, <code>.text-muted</code>).</li>
+                        <li><strong>Sidebar:</strong> "About" box (<code>.p-4.bg-light.rounded</code>) and a list of archived links using an unstyled list.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 9. FINAL PROJECT -->
+            <section id="final">
+                <h2 class="custom-heading">9. The Final Bootstrap Project</h2>
+                <div class="explanation">
+                    <strong>Project Goal:</strong> Build "TechCorp", a complete 4-page corporate website combining all components from previous projects.
+                </div>
+                <div class="demo-container">
+                    <h5>Project Architecture:</h5>
+                    <ul class="blueprint-list">
+                        <li><strong>index.html:</strong> Landing page with Carousel, Features Grid, and a Footer.</li>
+                        <li><strong>about.html:</strong> Team section using Cards, and an Accordion for FAQs.</li>
+                        <li><strong>services.html:</strong> Nav-tabs separating different service offerings, with a Pricing section below.</li>
+                        <li><strong>contact.html:</strong> A form utilizing Floating Labels, Input Groups, validation, and a Google Map embed within a <code>.ratio.ratio-16x9</code> wrapper.</li>
+                        <li><strong>Global:</strong> A consistent <code>.navbar.fixed-top</code> and Offcanvas menu on mobile across all 4 pages.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 10: INTERVIEWS -->
+            <section id="interview">
+                <h2 class="custom-heading">10. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "How do you achieve a sticky sidebar in a Dashboard layout?", a: "By applying the .sticky-top utility class and setting a height (like .vh-100) along with overflow-y: auto to the sidebar column."},
+                            {q: "What is the best way to center a Login form exactly in the middle of the screen?", a: "Wrap it in a container with .d-flex .align-items-center .justify-content-center .vh-100."},
+                            {q: "When building a pricing page, how do you make the middle tier card visually pop?", a: "Apply a thicker, colored border (.border .border-primary), elevate it slightly with .shadow-lg, and use a solid primary button instead of an outline button."},
+                            {q: "In an e-commerce site, how do you align the 'Add to Cart' buttons to the absolute bottom of product cards?", a: "Make the card a flex column (.d-flex .flex-column) and apply .mt-auto to the button (or the div wrapping the button)."},
+                            {q: "How do you create a quick-view feature on an e-commerce product grid?", a: "Add a button to the product card that has data-bs-toggle='modal' and targets a shared Modal component containing the product details."},
+                            {q: "What class is used to make a massive, eye-catching title in a Hero section?", a: "The .display-* classes, ranging from .display-1 (largest) to .display-6."},
+                            {q: "How would you structure a classic Blog layout?", a: "Use a .container with a .row. Inside, use .col-md-8 for the main article feed and .col-md-4 for the right-hand sidebar."},
+                            {q: "How do you ensure a Google Maps iframe embed maintains its aspect ratio responsively?", a: "Wrap the iframe in a div with the classes .ratio and .ratio-16x9 (or desired ratio)."},
+                            {q: "In a restaurant menu, how do you switch between Breakfast, Lunch, and Dinner categories without leaving the page?", a: "Use the Bootstrap Navs & Tabs components, specifically setting up data-bs-toggle='tab' on the nav links to target different tab panes."},
+                            {q: "What component is best suited for showing a high-level statistical number on an Admin Dashboard?", a: "A Bootstrap Card (.card) with a large typography class inside the .card-body, often colored contextually (e.g., .text-bg-success)."},
+                            {q: "How do you make an entire portfolio project card clickable?", a: "Place an anchor tag inside the card body and apply the .stretched-link class to it. Ensure the card has position: relative (which it does by default)."},
+                            {q: "What utility class removes the default styling of a list (useful for sidebar link lists)?", a: ".list-unstyled"},
+                            {q: "How do you implement HTML5 form validation on a Contact page?", a: "Add the 'novalidate' attribute to the <form> tag, add custom JS to intercept the submit event, and add the .was-validated class to the form upon submission."},
+                            {q: "In a responsive Navbar, what controls the collapse behavior on mobile?", a: "The .navbar-toggler button targeting the ID of the .navbar-collapse div."},
+                            {q: "Why is spacing so important in Landing Page sections?", a: "Generous whitespace improves readability and conversion. You should use classes like .py-5 (padding y-axis 5) to separate distinct sections of the landing page."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 11: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">11. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "Which classes perfectly center a login card vertically and horizontally?", opts: ["A) .center-all", "B) .d-flex .align-items-center .justify-content-center .vh-100", "C) .m-auto .h-100", "D) .absolute-center"], ans: "B"},
+                            {q: "To make all product cards in a grid row the exact same height, Bootstrap uses:", opts: ["A) JavaScript calculations", "B) Flexbox natively inside .row", "C) .card-equal-height", "D) .h-100 on the row"], ans: "B"},
+                            {q: "Which layout is standard for an admin dashboard?", opts: ["A) .col-12 for all", "B) Sidebar (.col-md-2) and Main Content (.col-md-10)", "C) 3 equal columns", "D) .container-fluid only"], ans: "B"},
+                            {q: "To embed a responsive YouTube video in a portfolio, wrap the iframe in:", opts: ["A) .video-fluid", "B) .embed-responsive", "C) .ratio .ratio-16x9", "D) .img-fluid"], ans: "C"},
+                            {q: "For a modern form input where the label sits inside the input and shrinks on focus, use:", opts: ["A) .form-floating", "B) .form-label-inside", "C) .input-group", "D) .form-control-lg"], ans: "A"},
+                            {q: "To make an entire pricing card clickable to select that tier, add what class to the button inside it?", opts: ["A) .card-link", "B) .stretched-link", "C) .btn-block", "D) .full-width"], ans: "B"},
+                            {q: "To add a notification dot to a shopping cart icon in a navbar, use a:", opts: ["A) .dot", "B) .badge", "C) .alert", "D) .toast"], ans: "B"},
+                            {q: "Which component is best for navigating between 'Breakfast', 'Lunch', and 'Dinner' on one page?", opts: ["A) Dropdown", "B) Carousel", "C) Navs & Tabs", "D) Accordion"], ans: "C"},
+                            {q: "A classic blog layout uses a 2-column grid. Which ratio is standard?", opts: ["A) 6 and 6", "B) 8 (Main) and 4 (Sidebar)", "C) 10 (Main) and 2 (Sidebar)", "D) 4 (Main) and 8 (Sidebar)"], ans: "B"},
+                            {q: "To fix a navigation bar to the top of a landing page permanently, use:", opts: ["A) .fixed-top", "B) .sticky-top", "C) .nav-fixed", "D) .top-0"], ans: "A"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-warning mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 12: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">12. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>In an Admin Dashboard, why use `.container-fluid` instead of `.container`?</strong><br>
+                        <em>Answer:</em> Dashboards usually contain data-heavy tables and complex grids that require maximum screen real estate. `.container-fluid` uses 100% of the viewport width, whereas `.container` places a max-width limit and adds large margins on wide screens.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Explain the process of creating a "Sticky Sidebar" for a blog.</strong><br>
+                        <em>Answer:</em> Wrap the sidebar contents in a div with the `.sticky-top` class. To prevent it from hitting the very top edge of the browser, add a top value using inline CSS or custom CSS (e.g., `top: 2rem;`).
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do you ensure a footer always stays at the bottom of the page, even if content is sparse?</strong><br>
+                        <em>Answer:</em> Make the `<body>` a flex column (`.d-flex .flex-column .min-vh-100`). Then, add `.mt-auto` (margin-top: auto) to the `<footer>` element to push it down.
+                    </li>
+                    <li class="mb-3">
+                        <strong>When building a pricing page, why is it recommended to use a row with `.g-4`?</strong><br>
+                        <em>Answer:</em> `.g-4` applies a consistent gutter (gap) both horizontally and vertically between the pricing cards, ensuring they don't touch each other, especially when they stack vertically on mobile devices.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Describe how to implement a "Dark Mode" toggle in a Bootstrap 5.3 project.</strong><br>
+                        <em>Answer:</em> Bootstrap 5.3 natively supports color modes. You can toggle dark mode by using JavaScript to change the `data-bs-theme="dark"` attribute on the `<html>` element.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 13: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">13. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 1: Dashboard Layout</h5>
+                                <p>Write the Grid classes for a full-width dashboard with a 2-column sidebar and 10-column main area on medium screens and up.</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;div class="container-fluid"&gt;<br>&nbsp;&nbsp;&lt;div class="row"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-md-2"&gt;Sidebar&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-md-10"&gt;Main&lt;/div&gt;<br>&nbsp;&nbsp;&lt;/div&gt;<br>&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 2: Blog Two-Column Setup</h5>
+                                <p>Write the Grid classes for a centered standard blog layout (8 columns main, 4 columns sidebar).</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <code>&lt;div class="container"&gt;<br>&nbsp;&nbsp;&lt;div class="row"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-md-8"&gt;Article&lt;/div&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-md-4"&gt;Sidebar&lt;/div&gt;<br>&nbsp;&nbsp;&lt;/div&gt;<br>&lt;/div&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 3: Shopping Cart Badge</h5>
+                                <p>Write the HTML for a generic button containing a cart icon and a red badge showing 5 items.</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <pre><code>&lt;button class="btn btn-primary"&gt;
+  &lt;i class="bi bi-cart"&gt;&lt;/i&gt;
+  &lt;span class="badge text-bg-danger"&gt;5&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 4: Push to Bottom</h5>
+                                <p>In an e-commerce card that uses flexbox column, what class pushes the "Add to Cart" button to the bottom?</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <code>class="mt-auto"</code> applied to the button or its immediate wrapper.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-warning">
+                            <div class="card-body">
+                                <h5>Exercise 5: Responsive Video</h5>
+                                <p>Write the wrapper div required to make a standard iframe (16x9 ratio) responsive for a landing page.</p>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <pre><code>&lt;div class="ratio ratio-16x9"&gt;
+  &lt;iframe src="..."&gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 14: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">14. Final Project Extensions</h2>
+                
+                <div class="mb-5">
+                    <h4>Extension 1: Dark Mode Toggle Implementation</h4>
+                    <p><strong>Goal:</strong> Add a functional theme switcher to your Final Project.</p>
+                    <ul>
+                        <li>Place a button with a moon/sun icon in your <code>.navbar</code>.</li>
+                        <li>Write a short vanilla JavaScript function that listens for a click on that button.</li>
+                        <li>When clicked, check the current theme by reading the <code>data-bs-theme</code> attribute on the <code>&lt;html&gt;</code> tag.</li>
+                        <li>If it's light, change it to <code>data-bs-theme="dark"</code>. If dark, change to light.</li>
+                        <li>Save the user's preference in <code>localStorage</code> so it persists across page reloads.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Extension 2: Interactive Checkout Offcanvas</h4>
+                    <p><strong>Goal:</strong> Enhance the E-commerce project by adding a slide-out cart.</p>
+                    <ul>
+                        <li>Change the "Cart" button in your navbar to trigger an <code>.offcanvas.offcanvas-end</code> component.</li>
+                        <li>Inside the offcanvas body, use a <code>.list-group.list-group-flush</code> to list out dummy cart items.</li>
+                        <li>Each list item should use flexbox (<code>.d-flex.justify-content-between</code>) to align the item name on the left and the price on the right.</li>
+                        <li>Pin a Checkout button to the absolute bottom of the offcanvas sidebar.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>

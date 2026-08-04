@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 10: Bootstrap Icons Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #dc3545; /* Red for Module 10 */
+            --theme-hover: #b02a37;
+            --theme-light: #f8d7da;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-color);
+        }
+        .sidebar h6 {
+            color: #6c757d;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-hover);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .icon-box {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 10px;
+            background: #fff;
+            transition: all 0.2s;
+        }
+        .icon-box:hover {
+            background-color: var(--theme-light);
+            border-color: var(--theme-color);
+            color: var(--theme-color);
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Module 10: Icons</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#overview">1. Bootstrap Icons</a>
+            <a class="nav-link" href="#installation">2. Installation</a>
+            <a class="nav-link" href="#web-font">3. Using Icon Fonts</a>
+            <a class="nav-link" href="#svg">4. Using Inline SVGs</a>
+            <a class="nav-link" href="#styling">5. Styling Icons</a>
+            <a class="nav-link" href="#buttons">6. Icons in Components</a>
+            
+            <h6 class="px-3 mt-4 mb-2 text-muted text-uppercase" style="font-size:0.8rem">Assessments</h6>
+            <a class="nav-link" href="#interview">7. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">8. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">9. Short Answers</a>
+            <a class="nav-link" href="#exercises">10. Coding Exercises</a>
+            <a class="nav-link" href="#projects">11. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Icons</h1>
+            <p class="lead text-muted mb-5">Free, high quality, open source icon library with over 2,000 icons. Include them anyway you like—SVGs, SVG sprite, or web fonts.</p>
+
+            <!-- 1. OVERVIEW -->
+            <section id="overview">
+                <h2 class="custom-heading">1. Introduction to Bootstrap Icons</h2>
+                <p>Bootstrap Icons is a dedicated icon library. While they are built for Bootstrap components, they are completely standalone and can be used in any project regardless of whether you use the Bootstrap CSS framework.</p>
+                <div class="explanation">
+                    <strong>Key Features:</strong>
+                    <ul>
+                        <li>Over 2,000 icons.</li>
+                        <li>Available as SVGs for perfect scaling.</li>
+                        <li>Available as an Icon Web Font for rapid prototyping.</li>
+                        <li>Inherit the color and size of their parent text automatically.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. INSTALLATION -->
+            <section id="installation">
+                <h2 class="custom-heading">2. Installation</h2>
+                <p>To use the Web Font approach, you must include the Bootstrap Icons CSS file in your <code>&lt;head&gt;</code>. This is separate from the standard Bootstrap CSS.</p>
+                
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Place this in your &lt;head&gt; to use Bootstrap Icons --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 3. WEB FONT -->
+            <section id="web-font">
+                <h2 class="custom-heading">3. Using Icon Fonts</h2>
+                <p>The easiest way to use Bootstrap Icons is via the web font. You add an <code>&lt;i&gt;</code> element with the base class <code>bi</code>, followed by the specific icon class (e.g., <code>bi-alarm</code>).</p>
+                
+                <div class="demo-container text-center">
+                    <div class="icon-box">
+                        <i class="bi bi-heart fs-2"></i>
+                        <small class="mt-2">bi-heart</small>
+                    </div>
+                    <div class="icon-box">
+                        <i class="bi bi-heart-fill fs-2"></i>
+                        <small class="mt-2">bi-heart-fill</small>
+                    </div>
+                    <div class="icon-box">
+                        <i class="bi bi-alarm fs-2"></i>
+                        <small class="mt-2">bi-alarm</small>
+                    </div>
+                    <div class="icon-box">
+                        <i class="bi bi-gear fs-2"></i>
+                        <small class="mt-2">bi-gear</small>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Example of using the Web Font classes --&gt;
+&lt;i class="bi bi-heart"&gt;&lt;/i&gt;
+&lt;i class="bi bi-heart-fill"&gt;&lt;/i&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 4. SVG -->
+            <section id="svg">
+                <h2 class="custom-heading">4. Using Inline SVGs</h2>
+                <p>For maximum performance and styling flexibility, you can embed the SVG code directly into your HTML. This removes the need for an extra network request (like fetching a font file).</p>
+                
+                <div class="demo-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                        <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+                        <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                    </svg>
+                    <span class="ms-3 fs-4">Inline SVG Camera</span>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16"&gt;
+  &lt;!-- Path data goes here --&gt;
+&lt;/svg&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 5. STYLING -->
+            <section id="styling">
+                <h2 class="custom-heading">5. Styling Icons (Size & Color)</h2>
+                <p>Because icons are treated as text elements (or have <code>fill="currentColor"</code> for SVGs), you can style them using Bootstrap's standard text utility classes.</p>
+                
+                <div class="demo-container">
+                    <h4>Color Utilities</h4>
+                    <i class="bi bi-check-circle-fill text-success fs-2 me-3"></i>
+                    <i class="bi bi-exclamation-triangle-fill text-warning fs-2 me-3"></i>
+                    <i class="bi bi-x-octagon-fill text-danger fs-2 me-3"></i>
+                    <i class="bi bi-info-circle-fill text-info fs-2 me-3"></i>
+                    
+                    <h4 class="mt-4">Size Utilities</h4>
+                    <i class="bi bi-star"></i> (Default) <br>
+                    <i class="bi bi-star fs-4"></i> (.fs-4) <br>
+                    <i class="bi bi-star fs-1"></i> (.fs-1)
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Sizing with typography utilities --&gt;
+&lt;i class="bi bi-star fs-1"&gt;&lt;/i&gt;
+
+&lt;!-- Coloring with text color utilities --&gt;
+&lt;i class="bi bi-check-circle text-success"&gt;&lt;/i&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- 6. COMPONENTS -->
+            <section id="buttons">
+                <h2 class="custom-heading">6. Icons in Components</h2>
+                <p>Icons pair perfectly with Bootstrap components like buttons, input groups, and alerts.</p>
+                
+                <div class="demo-container">
+                    <button class="btn btn-primary mb-3">
+                        <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download File
+                    </button>
+                    
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </div>
+
+                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                        <i class="bi bi-info-circle-fill flex-shrink-0 me-2 fs-4"></i>
+                        <div>
+                            An example alert with an icon and flexbox alignment.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;button class="btn btn-primary"&gt;
+  &lt;i class="bi bi-download me-2"&gt;&lt;/i&gt; Download
+&lt;/button&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 7: INTERVIEWS -->
+            <section id="interview">
+                <h2 class="custom-heading">7. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "What prefix is used for all Bootstrap Icon classes?", a: "The prefix 'bi' is used as the base class, followed by 'bi-{icon-name}'."},
+                            {q: "Do Bootstrap Icons require the Bootstrap CSS framework to work?", a: "No, they are completely decoupled and can be used in any project regardless of the CSS framework used."},
+                            {q: "How do you change the color of a Bootstrap Icon?", a: "You can apply text color utility classes (e.g., .text-danger) because the icons inherit color via the CSS currentColor property."},
+                            {q: "How do you change the size of an icon when using the web font?", a: "Since they act as fonts, you can use font-size CSS or Bootstrap's typography utilities like .fs-1, .fs-2, etc."},
+                            {q: "What is the accessibility attribute you should add to an icon if it conveys meaning not present in text?", a: "You should add aria-label='Description' or aria-hidden='true' if it's purely decorative."},
+                            {q: "What are the three ways to include Bootstrap Icons in a project?", a: "1. Web Font (CSS), 2. Inline SVG, 3. SVG Sprite."},
+                            {q: "Why might inline SVG be preferred over the web font?", a: "Inline SVGs prevent render-blocking HTTP requests for font files and allow for more complex, multi-part CSS styling/animations directly on the SVG paths."},
+                            {q: "What does the 'fill=\"currentColor\"' attribute do in the SVG icon?", a: "It tells the SVG to inherit its fill color from the text color of its parent element, allowing utility classes like .text-primary to work."},
+                            {q: "If an icon name has '-fill' at the end, what does that indicate?", a: "It indicates a solid, filled-in version of the icon, rather than an outlined version."},
+                            {q: "How would you add space between an icon and text inside a button?", a: "By using spacing utilities on the icon, such as .me-2 (margin-end) if the text is to the right of the icon."},
+                            {q: "Can Bootstrap icons be used in an <input> placeholder?", a: "No, standard HTML inputs cannot render HTML elements like <i> or <svg> inside the placeholder attribute. You would use an Input Group addon instead."},
+                            {q: "How do you vertically align an icon with text?", a: "Often, they align naturally, but you can use flexbox utilities (d-flex align-items-center) on the parent, or vertical alignment utilities (.align-middle) on the icon."},
+                            {q: "Where can you find the CDN link to include Bootstrap Icons?", a: "On the official Bootstrap Icons website or via a service like jsDelivr (cdn.jsdelivr.net)."},
+                            {q: "Is it possible to scale an SVG icon without losing quality?", a: "Yes, SVGs (Scalable Vector Graphics) are mathematically drawn and scale infinitely without pixelation."},
+                            {q: "What is an SVG Sprite?", a: "A single SVG file containing all icons as <symbol> tags. You include the sprite once and reference individual icons using <use href='sprite.svg#icon-name'>."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 8: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">8. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "What is the base class required to use a Bootstrap Icon via Web Font?", opts: ["A) .icon", "B) .bs-icon", "C) .bi", "D) .font-icon"], ans: "C"},
+                            {q: "How do you make an icon red?", opts: ["A) .icon-red", "B) .text-danger", "C) .bg-danger", "D) color='red'"], ans: "B"},
+                            {q: "Which attribute ensures an inline SVG inherits text color?", opts: ["A) color='inherit'", "B) style='color: auto'", "C) fill='currentColor'", "D) stroke='text'"], ans: "C"},
+                            {q: "To use the filled version of a star icon, the class is usually:", opts: ["A) .bi-star-solid", "B) .bi-star-full", "C) .bi-star-fill", "D) .bi-star-dark"], ans: "C"},
+                            {q: "How do you change the size of an icon using the Web Font method?", opts: ["A) .icon-lg", "B) .size-4", "C) Typography classes like .fs-1", "D) .w-100"], ans: "C"},
+                            {q: "Are Bootstrap Icons a mandatory part of the core Bootstrap framework?", opts: ["A) Yes", "B) No, they are a separate library", "C) Yes, they are in bootstrap.min.css", "D) Yes, but only in version 5"], ans: "B"},
+                            {q: "To add horizontal space to the right of an icon, you use:", opts: ["A) .mr-2", "B) .padding-right", "C) .me-2", "D) .space-2"], ans: "C"},
+                            {q: "Which HTML tag is most commonly used for Icon Fonts?", opts: ["A) <icon>", "B) <i>", "C) <img>", "D) <div>"], ans: "B"},
+                            {q: "If an icon is decorative only, what attribute should you add for screen readers?", opts: ["A) alt='icon'", "B) title='decorative'", "C) aria-hidden='true'", "D) role='img'"], ans: "C"},
+                            {q: "Which method prevents an extra HTTP request for an icon font file?", opts: ["A) CDN Link", "B) Inline SVG", "C) Local Font File", "D) Web Font"], ans: "B"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-danger mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 9: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">9. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>What is the difference between `<i class="bi bi-heart"></i>` and `<i class="bi bi-heart-fill"></i>`?</strong><br>
+                        <em>Answer:</em> `bi-heart` displays the outlined version of the icon, while `bi-heart-fill` displays the solid, filled-in version.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Explain why you can use standard text utilities to style Web Font icons.</strong><br>
+                        <em>Answer:</em> Because the web font method uses text characters mapped to icon glyphs. The browser treats them as text, so `font-size` and `color` properties apply perfectly.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How would you place a search icon inside an input field?</strong><br>
+                        <em>Answer:</em> You wrap the `<input>` in an `.input-group` and place the icon inside an `.input-group-text` span attached to the input.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why is `aria-hidden="true"` important for purely visual icons?</strong><br>
+                        <em>Answer:</em> It hides the icon from screen readers, preventing them from reading out confusing or redundant character codes to visually impaired users.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What must be included in your HTML `<head>` before you can use the `bi` classes?</strong><br>
+                        <em>Answer:</em> A `<link>` tag referencing the `bootstrap-icons.min.css` stylesheet from a CDN or local directory.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 10: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">10. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 1: Basic Icon</h5>
+                                <p>Write the HTML to display the <code>house</code> icon using the web font classes.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;i class="bi bi-house"&gt;&lt;/i&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 2: Colored & Sized Icon</h5>
+                                <p>Write the HTML to display a filled star icon that is colored Warning (yellow) and uses typography size 1.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <code>&lt;i class="bi bi-star-fill text-warning fs-1"&gt;&lt;/i&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 3: Icon Button</h5>
+                                <p>Create a primary button with the text "Settings". Place a gear icon to the left of the text with a small margin.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <pre><code>&lt;button class="btn btn-primary"&gt;
+  &lt;i class="bi bi-gear me-2"&gt;&lt;/i&gt;Settings
+&lt;/button&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 4: Icon in Alert</h5>
+                                <p>Create a danger alert. Inside it, place a filled exclamation triangle icon before the text "Error occurred".</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <pre><code>&lt;div class="alert alert-danger"&gt;
+  &lt;i class="bi bi-exclamation-triangle-fill me-2"&gt;&lt;/i&gt;Error occurred
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-danger">
+                            <div class="card-body">
+                                <h5>Exercise 5: Accessible Icon</h5>
+                                <p>Write the code for a trash can icon (bi-trash) that is hidden from screen readers.</p>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <code>&lt;i class="bi bi-trash" aria-hidden="true"&gt;&lt;/i&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 11: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">11. 2 Mini Projects</h2>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Social Media Footer Toolbar</h4>
+                    <p><strong>Goal:</strong> Build a horizontal list of social icons using Bootstrap utilities.</p>
+                    <ul>
+                        <li>Create an unstyled inline list (<code>.list-unstyled .d-flex .justify-content-center</code>).</li>
+                        <li>Inside the list items, create anchor tags.</li>
+                        <li>Inside the anchor tags, place Web Font icons for Facebook, Twitter (X), Instagram, and GitHub (e.g., <code>bi-github</code>).</li>
+                        <li>Style the icons using <code>.fs-3</code> for size and <code>.text-secondary</code> for color.</li>
+                        <li>Add a gap between items using <code>.gap-3</code> on the flex container.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Feature Value Props (Cards)</h4>
+                    <p><strong>Goal:</strong> Use icons as large visual anchors for feature marketing cards.</p>
+                    <ul>
+                        <li>Create a grid row with 3 columns.</li>
+                        <li>Inside each column, create a <code>.card</code> with <code>.text-center</code> and heavy padding (<code>.p-4</code>).</li>
+                        <li>At the top of the card body, place a very large icon (e.g., <code>.fs-1 .text-primary .mb-3</code>). Use icons like a lightning bolt (Speed), shield (Security), and headset (Support).</li>
+                        <li>Below the icon, add a standard <code>.card-title</code> and <code>.card-text</code>.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>

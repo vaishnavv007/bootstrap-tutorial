@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 11: Bootstrap JavaScript API Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #198754; /* Success Green for JS APIs */
+            --theme-hover: #146c43;
+            --theme-light: #d1e7dd;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #212529;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 8px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-color);
+        }
+        .sidebar h6 {
+            color: #6c757d;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-hover);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        /* Scrollspy demo box */
+        .scrollspy-example {
+            height: 150px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Module 11: JS APIs</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#overview">1. Plugins Overview</a>
+            <a class="nav-link" href="#modal">2. Modal API</a>
+            <a class="nav-link" href="#carousel">3. Carousel API</a>
+            <a class="nav-link" href="#tooltip">4. Tooltip API</a>
+            <a class="nav-link" href="#popover">5. Popover API</a>
+            <a class="nav-link" href="#collapse">6. Collapse API</a>
+            <a class="nav-link" href="#scrollspy">7. Scrollspy API</a>
+            <a class="nav-link" href="#toast">8. Toast API</a>
+            <a class="nav-link" href="#offcanvas">9. Offcanvas API</a>
+            
+            <h6 class="px-3 mt-4 mb-2 text-muted text-uppercase" style="font-size:0.8rem">Assessments</h6>
+            <a class="nav-link" href="#interview">10. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">11. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">12. Short Answers</a>
+            <a class="nav-link" href="#exercises">13. Coding Exercises</a>
+            <a class="nav-link" href="#projects">14. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap JavaScript APIs</h1>
+            <p class="lead text-muted mb-5">Programmatically control Bootstrap components, configure options, and hook into custom events using vanilla JavaScript.</p>
+
+            <!-- 1. OVERVIEW -->
+            <section id="overview">
+                <h2 class="custom-heading">1. JavaScript Plugins Overview</h2>
+                <p>Bootstrap components can be controlled via HTML <code>data-bs-*</code> attributes, but you can also control them directly with JavaScript. Every plugin is exposed on the global <code>bootstrap</code> object.</p>
+                <div class="explanation">
+                    <strong>Core API Concepts:</strong>
+                    <ul>
+                        <li><strong>Instantiation:</strong> <code>const modal = new bootstrap.Modal(document.getElementById('myModal'), { options })</code></li>
+                        <li><strong>Methods:</strong> <code>modal.show()</code>, <code>modal.hide()</code>, <code>modal.toggle()</code></li>
+                        <li><strong>Events:</strong> Listen to component lifecycle events (e.g., <code>element.addEventListener('shown.bs.modal', function() {})</code>)</li>
+                        <li><strong>Get Instance:</strong> <code>const existingModal = bootstrap.Modal.getInstance(myModalEl)</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. MODAL API -->
+            <section id="modal">
+                <h2 class="custom-heading">2. Modal API</h2>
+                <p>Control a modal dialog programmatically without using `data-bs-toggle`.</p>
+                
+                <div class="demo-container">
+                    <!-- The Modal HTML -->
+                    <div class="modal fade" id="apiModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">API Modal</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    This modal was triggered via JavaScript!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trigger Buttons -->
+                    <button class="btn btn-success" id="btnShowModal">Show Modal via JS</button>
+                    <p class="mt-3 text-muted" id="modalEventLog">Modal status: Ready</p>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-javascript">// 1. Initialize
+const myModalEl = document.getElementById('apiModal');
+const myModal = new bootstrap.Modal(myModalEl, { keyboard: false });
+
+// 2. Call methods
+document.getElementById('btnShowModal').addEventListener('click', () => {
+    myModal.show();
+});
+
+// 3. Listen to events
+myModalEl.addEventListener('hidden.bs.modal', event => {
+    console.log('Modal was closed!');
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 3. CAROUSEL API -->
+            <section id="carousel">
+                <h2 class="custom-heading">3. Carousel API</h2>
+                <p>Cycle through carousel items via external JavaScript controls.</p>
+                
+                <div class="demo-container">
+                    <div id="apiCarousel" class="carousel slide mb-3">
+                        <div class="carousel-inner rounded">
+                            <div class="carousel-item active bg-primary text-white p-5 text-center"><h5>Slide 1</h5></div>
+                            <div class="carousel-item bg-danger text-white p-5 text-center"><h5>Slide 2</h5></div>
+                            <div class="carousel-item bg-warning text-dark p-5 text-center"><h5>Slide 3</h5></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary" id="btnCarPrev">Previous</button>
+                    <button class="btn btn-outline-primary" id="btnCarNext">Next</button>
+                    <button class="btn btn-outline-success ms-2" id="btnCarSlide2">Go directly to Slide 2</button>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-javascript">const myCarouselElement = document.querySelector('#apiCarousel');
+// Initialize with options (e.g., disable auto-sliding)
+const carousel = new bootstrap.Carousel(myCarouselElement, {
+  interval: false
+});
+
+document.getElementById('btnCarNext').addEventListener('click', () => {
+    carousel.next(); // Go to next slide
+});
+
+document.getElementById('btnCarSlide2').addEventListener('click', () => {
+    carousel.to(1); // Index is 0-based
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 4. TOOLTIP API -->
+            <section id="tooltip">
+                <h2 class="custom-heading">4. Tooltip API</h2>
+                <p>Tooltips are opt-in and must be initialized via JavaScript. You can also trigger them manually.</p>
+                
+                <div class="demo-container">
+                    <button class="btn btn-secondary me-3" id="apiTooltip" data-bs-toggle="tooltip" title="I am a JS Tooltip!">
+                        Hover over me
+                    </button>
+                    <hr>
+                    <h6>Manual JS Triggers for the above tooltip:</h6>
+                    <button class="btn btn-sm btn-outline-success" id="btnShowTooltip">.show()</button>
+                    <button class="btn btn-sm btn-outline-danger" id="btnHideTooltip">.hide()</button>
+                </div>
+<pre><code class="language-javascript">const tooltipEl = document.getElementById('apiTooltip');
+const myTooltip = new bootstrap.Tooltip(tooltipEl);
+
+document.getElementById('btnShowTooltip').addEventListener('click', () => {
+    myTooltip.show(); 
+});</code></pre>
+            </section>
+
+            <!-- 5. POPOVER API -->
+            <section id="popover">
+                <h2 class="custom-heading">5. Popover API</h2>
+                <p>Like Tooltips, Popovers require JavaScript initialization and can be controlled programmatically.</p>
+                
+                <div class="demo-container">
+                    <button class="btn btn-info text-white" id="apiPopover" data-bs-content="Popover content via API." data-bs-placement="right">
+                        Click for Popover
+                    </button>
+                </div>
+<pre><code class="language-javascript">const popoverEl = document.getElementById('apiPopover');
+// Initialize with custom options in JS instead of HTML attributes
+const myPopover = new bootstrap.Popover(popoverEl, {
+    title: 'Custom JS Title',
+    trigger: 'focus' // Dismiss on next click
+});</code></pre>
+            </section>
+
+            <!-- 6. COLLAPSE API -->
+            <section id="collapse">
+                <h2 class="custom-heading">6. Collapse API</h2>
+                <p>Toggle the visibility of content using the Collapse API.</p>
+                
+                <div class="demo-container">
+                    <button class="btn btn-dark mb-3" id="btnToggleCollapse">Toggle Content via JS</button>
+                    <div class="collapse" id="apiCollapse">
+                        <div class="card card-body bg-light">
+                            This content is being toggled by a JavaScript event listener calling <code>collapseInstance.toggle()</code>.
+                        </div>
+                    </div>
+                </div>
+<pre><code class="language-javascript">const collapseElementList = document.getElementById('apiCollapse');
+const collapseList = new bootstrap.Collapse(collapseElementList, {
+  toggle: false // Don't open it immediately on instantiation
+});
+
+document.getElementById('btnToggleCollapse').addEventListener('click', () => {
+    collapseList.toggle();
+});</code></pre>
+            </section>
+
+            <!-- 7. SCROLLSPY API -->
+            <section id="scrollspy">
+                <h2 class="custom-heading">7. Scrollspy API</h2>
+                <p>When adding or removing elements in the DOM, you may need to call the scrollspy `refresh` method programmatically.</p>
+                
+                <div class="demo-container">
+                    <nav id="navbar-scrollspy" class="navbar bg-light px-3 mb-3">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link" href="#scroll-1">One</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#scroll-2">Two</a></li>
+                        </ul>
+                    </nav>
+                    <div data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-light p-3 rounded-2" tabindex="0">
+                        <h5 id="scroll-1">Section 1</h5>
+                        <p>Scroll down to see the nav pill change automatically.</p>
+                        <p style="height: 100px;"></p>
+                        <h5 id="scroll-2">Section 2</h5>
+                        <p>This is section 2 content.</p>
+                        <p style="height: 100px;"></p>
+                    </div>
+                </div>
+<pre><code class="language-javascript">// If you dynamically add content, you must refresh the spy
+const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
+dataSpyList.forEach(dataSpyEl => {
+  bootstrap.ScrollSpy.getInstance(dataSpyEl).refresh();
+});</code></pre>
+            </section>
+
+            <!-- 8. TOAST API -->
+            <section id="toast">
+                <h2 class="custom-heading">8. Toast API</h2>
+                <p>Toasts are hidden by default. You MUST use JavaScript to show them.</p>
+                
+                <div class="demo-container">
+                    <button class="btn btn-warning" id="btnShowToast">Trigger Toast</button>
+
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div id="apiToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header bg-warning text-dark">
+                                <strong class="me-auto">System Message</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                Action completed successfully!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<pre><code class="language-javascript">const toastEl = document.getElementById('apiToast');
+const toast = new bootstrap.Toast(toastEl, { delay: 3000 }); // Auto-hide after 3s
+
+document.getElementById('btnShowToast').addEventListener('click', () => {
+    toast.show();
+});</code></pre>
+            </section>
+
+            <!-- 9. OFFCANVAS API -->
+            <section id="offcanvas">
+                <h2 class="custom-heading">9. Offcanvas API</h2>
+                <p>Programmatically open, close, and configure offcanvas sidebars.</p>
+                
+                <div class="demo-container">
+                    <button class="btn btn-primary" id="btnShowOffcanvas">Open Sidebar</button>
+
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="apiOffcanvas">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title">API Sidebar</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            Triggered strictly by <code>offcanvas.show()</code>
+                        </div>
+                    </div>
+                </div>
+<pre><code class="language-javascript">const offcanvasElement = document.getElementById('apiOffcanvas');
+const offcanvas = new bootstrap.Offcanvas(offcanvasElement, {
+    backdrop: 'static' // Prevents closing when clicking outside
+});
+
+document.getElementById('btnShowOffcanvas').addEventListener('click', () => {
+    offcanvas.show();
+});</code></pre>
+            </section>
+
+            <!-- SECTION 10: INTERVIEWS -->
+            <section id="interview">
+                <h2 class="custom-heading">10. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "How do you initialize a Bootstrap component using JavaScript?", a: "By creating a new instance of the component class attached to the global bootstrap object, passing in the DOM element (e.g., new bootstrap.Modal(document.getElementById('myModal')))."},
+                            {q: "What is the difference between data attributes and the JS API?", a: "Data attributes (data-bs-toggle) allow declarative initialization without writing custom JS scripts. The JS API provides finer programmatic control, method execution (show/hide), and event listening."},
+                            {q: "How do you retrieve an already initialized instance of a Bootstrap component?", a: "Using the static getInstance method (e.g., bootstrap.Modal.getInstance(myElement))."},
+                            {q: "What happens if you try to get an instance of a component that hasn't been initialized?", a: "getInstance() will return null. You can use getOrCreateInstance() to safely get it or create it if it doesn't exist."},
+                            {q: "How do you listen for when a Modal has completely finished fading in?", a: "Add an event listener to the modal element for the 'shown.bs.modal' event."},
+                            {q: "What does the dispose() method do?", a: "It destroys an element's Bootstrap component instance, removing any stored data and event listeners associated with it to prevent memory leaks."},
+                            {q: "Why do Tooltips and Popovers require manual JS initialization?", a: "For performance reasons, Bootstrap does not auto-initialize them to prevent scanning the entire DOM for these attributes on load."},
+                            {q: "How do you configure a Modal to not close when the user clicks the backdrop?", a: "Pass a configuration object during initialization: new bootstrap.Modal(el, { backdrop: 'static' })."},
+                            {q: "How do you move a Carousel to a specific slide using JS?", a: "Call the .to(index) method on the carousel instance, where index is a 0-based integer."},
+                            {q: "What event fires immediately when the hide instance method is called on an Offcanvas?", a: "'hide.bs.offcanvas'"},
+                            {q: "Can you pass options to a JS component if it was already initialized via data attributes?", a: "No, options must be passed during initial instantiation. To change options, you must destroy (dispose) the instance and recreate it."},
+                            {q: "How do you programmatically trigger a Tooltip to appear?", a: "Retrieve or create the tooltip instance, then call its .show() method."},
+                            {q: "What is the primary dependency required for Dropdowns, Popovers, and Tooltips to position themselves?", a: "Popper.js (which is included in the bootstrap.bundle.min.js file)."},
+                            {q: "Why might a Scrollspy highlight the wrong nav link after dynamic content is added?", a: "Because the DOM heights changed. You must programmatically call scrollspyInstance.refresh() to recalculate offsets."},
+                            {q: "What does the toggle() method do?", a: "It toggles the visibility state of a component (e.g., if a collapse is open, toggle() closes it; if closed, toggle() opens it)."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 11: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">11. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "What is the global variable used to access Bootstrap JS plugins?", opts: ["A) $", "B) bs", "C) bootstrap", "D) BootstrapJS"], ans: "C"},
+                            {q: "Which method retrieves an existing modal instance without creating a new one?", opts: ["A) getModal()", "B) getInstance()", "C) fetchInstance()", "D) selectInstance()"], ans: "B"},
+                            {q: "What method should you call to prevent memory leaks when removing a component from the DOM?", opts: ["A) .remove()", "B) .destroy()", "C) .dispose()", "D) .delete()"], ans: "C"},
+                            {q: "Which event fires AFTER a modal has completely finished closing CSS transitions?", opts: ["A) hide.bs.modal", "B) hidden.bs.modal", "C) closed.bs.modal", "D) disappear.bs.modal"], ans: "B"},
+                            {q: "How do you pause a carousel using JS?", opts: ["A) carousel.stop()", "B) carousel.pause()", "C) carousel.wait()", "D) carousel.halt()"], ans: "B"},
+                            {q: "Which plugin does NOT require manual JS initialization by default?", opts: ["A) Tooltips", "B) Popovers", "C) Modals", "D) Toasts"], ans: "C"},
+                            {q: "How to open an offcanvas sidebar using JS?", opts: ["A) offcanvas.open()", "B) offcanvas.show()", "C) offcanvas.slide()", "D) offcanvas.reveal()"], ans: "B"},
+                            {q: "If an element has 'data-bs-toggle=\"collapse\"', can you still control it via JS?", opts: ["A) Yes, by calling getOrCreateInstance() and using methods.", "B) No, they are mutually exclusive.", "C) Only if you remove the attribute first.", "D) Yes, but only in jQuery."], ans: "A"},
+                            {q: "Which method forces Scrollspy to recalculate offsets?", opts: ["A) .update()", "B) .recalc()", "C) .refresh()", "D) .sync()"], ans: "C"},
+                            {q: "Which property configures a toast to NOT auto-hide via JS options?", opts: ["A) autohide: false", "B) delay: 0", "C) persist: true", "D) autoClose: false"], ans: "A"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-success mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 12: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">12. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>What is the difference between `hide.bs.modal` and `hidden.bs.modal` events?</strong><br>
+                        <em>Answer:</em> `hide.bs.modal` is fired immediately when the hide instance method has been called. `hidden.bs.modal` is fired only after the CSS fading transition has completely finished and the modal is fully hidden.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Explain the purpose of `bootstrap.Modal.getOrCreateInstance(element)`.</strong><br>
+                        <em>Answer:</em> It safely returns the Bootstrap component instance associated with a DOM element. If the instance doesn't exist yet, it creates a new one and returns it. This avoids creating duplicate instances on the same element.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why might you pass `{ keyboard: false }` when instantiating a Modal?</strong><br>
+                        <em>Answer:</em> This configuration option prevents the modal from closing when the user presses the Escape key.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How would you execute code exactly when a Toast disappears?</strong><br>
+                        <em>Answer:</em> By adding an event listener to the toast element: `element.addEventListener('hidden.bs.toast', () => { /* code */ });`.
+                    </li>
+                    <li class="mb-3">
+                        <strong>If you change a Collapse element's content size dynamically, what might you need to do?</strong><br>
+                        <em>Answer:</em> Usually nothing, as Collapse handles CSS height transitions natively. But if it's tied to a Scrollspy, you must call the Scrollspy's `.refresh()` method.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 13: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">13. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 1: Initialize a Tooltip</h5>
+                                <p>Write the JS code to initialize a tooltip on an element with the ID <code>#myTooltip</code>.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <pre><code>const el = document.getElementById('myTooltip');
+const tooltip = new bootstrap.Tooltip(el);</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 2: Show a Modal</h5>
+                                <p>Given an existing modal instance variable <code>myModal</code>, write the code to open it.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <code>myModal.show();</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 3: Modal Event</h5>
+                                <p>Write an event listener on <code>myModalEl</code> that logs "Opened" when the modal is fully visible.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <pre><code>myModalEl.addEventListener('shown.bs.modal', () => {
+  console.log("Opened");
+});</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-success">
+                            <div class="card-body">
+                                <h5>Exercise 4: Get Instance</h5>
+                                <p>Write the code to retrieve an existing Collapse instance on the element <code>collEl</code>.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <code>const coll = bootstrap.Collapse.getInstance(collEl);</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-success">
+                            <div class="card-body">
+                                <h5>Exercise 5: Toast Configuration</h5>
+                                <p>Initialize a Toast on <code>toastEl</code> so that it does NOT auto-hide.</p>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <pre><code>const myToast = new bootstrap.Toast(toastEl, {
+  autohide: false
+});</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 14: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">14. 2 Mini Projects</h2>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Chaining Component Events</h4>
+                    <p><strong>Goal:</strong> Make a Toast appear immediately after a Modal finishes closing.</p>
+                    <ul>
+                        <li>Create HTML for a Modal and a Toast.</li>
+                        <li>Initialize both components using JavaScript.</li>
+                        <li>Add an event listener to the Modal element listening for the <code>hidden.bs.modal</code> event.</li>
+                        <li>Inside the callback function of that listener, call <code>toastInstance.show()</code>.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Carousel External Controls</h4>
+                    <p><strong>Goal:</strong> Build a custom UI to control a Carousel.</p>
+                    <ul>
+                        <li>Create a standard Carousel but hide the native prev/next buttons and indicators using CSS (or just omit the HTML for them).</li>
+                        <li>Initialize the Carousel in JavaScript with <code>interval: false</code> so it doesn't auto-play.</li>
+                        <li>Create a separate HTML list of links (e.g., "View Slide 1", "View Slide 2").</li>
+                        <li>Add click event listeners to those links that use the Carousel API <code>.to(index)</code> method to navigate to the specific slide.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <!-- Custom Scripts to Drive the Interactive Demos -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Initialize Syntax Highlighting
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+
+            // 1. Modal API
+            const myModalEl = document.getElementById('apiModal');
+            const myModal = new bootstrap.Modal(myModalEl, { keyboard: true });
+            document.getElementById('btnShowModal').addEventListener('click', () => {
+                myModal.show();
+            });
+            const logEl = document.getElementById('modalEventLog');
+            myModalEl.addEventListener('show.bs.modal', () => logEl.innerText = "Modal status: Opening...");
+            myModalEl.addEventListener('shown.bs.modal', () => logEl.innerText = "Modal status: Fully Opened");
+            myModalEl.addEventListener('hide.bs.modal', () => logEl.innerText = "Modal status: Closing...");
+            myModalEl.addEventListener('hidden.bs.modal', () => logEl.innerText = "Modal status: Closed");
+
+            // 2. Carousel API
+            const carouselEl = document.getElementById('apiCarousel');
+            const carousel = new bootstrap.Carousel(carouselEl, { interval: false });
+            document.getElementById('btnCarPrev').addEventListener('click', () => carousel.prev());
+            document.getElementById('btnCarNext').addEventListener('click', () => carousel.next());
+            document.getElementById('btnCarSlide2').addEventListener('click', () => carousel.to(1));
+
+            // 3. Tooltip API
+            const tooltipEl = document.getElementById('apiTooltip');
+            const tooltip = new bootstrap.Tooltip(tooltipEl);
+            document.getElementById('btnShowTooltip').addEventListener('click', () => tooltip.show());
+            document.getElementById('btnHideTooltip').addEventListener('click', () => tooltip.hide());
+
+            // 4. Popover API
+            const popoverEl = document.getElementById('apiPopover');
+            new bootstrap.Popover(popoverEl, {
+                title: 'JS Popover',
+                trigger: 'focus'
+            });
+
+            // 5. Collapse API
+            const collapseEl = document.getElementById('apiCollapse');
+            const collapse = new bootstrap.Collapse(collapseEl, { toggle: false });
+            document.getElementById('btnToggleCollapse').addEventListener('click', () => collapse.toggle());
+
+            // 6. Toast API
+            const toastEl = document.getElementById('apiToast');
+            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            document.getElementById('btnShowToast').addEventListener('click', () => toast.show());
+
+            // 7. Offcanvas API
+            const offcanvasEl = document.getElementById('apiOffcanvas');
+            const offcanvas = new bootstrap.Offcanvas(offcanvasEl);
+            document.getElementById('btnShowOffcanvas').addEventListener('click', () => offcanvas.show());
+        });
+    </script>
+</body>
+</html>

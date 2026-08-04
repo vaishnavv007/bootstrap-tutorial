@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Bootstrap Content Masterclass</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code formatting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --theme-color: #6f42c1; /* Indigo/Purple for Module 4 */
+            --theme-hover: #59339d;
+            --theme-light: #e0d6f6;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: #2c2a30;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 0;
+            z-index: 1050;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: var(--theme-color);
+        }
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+        /* Demo Styling */
+        .demo-container {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .code-block { margin-bottom: 2rem; }
+        .explanation {
+            border-left: 4px solid var(--theme-color);
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        section {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+        .custom-heading {
+            color: var(--theme-color);
+            border-bottom: 2px solid var(--theme-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar-example" tabindex="0">
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h4 class="px-3 mb-4 text-white">Module 4: Content</h4>
+        <nav id="navbar-example" class="nav flex-column">
+            <a class="nav-link" href="#typography">1. Typography</a>
+            <a class="nav-link" href="#display">2. Display Headings</a>
+            <a class="nav-link" href="#lead">3. Lead Text</a>
+            <a class="nav-link" href="#lists">4. Lists</a>
+            <a class="nav-link" href="#blockquotes">5. Blockquotes</a>
+            <a class="nav-link" href="#images">6. Images</a>
+            <a class="nav-link" href="#figures">7. Figures</a>
+            <a class="nav-link" href="#tables">8. Tables</a>
+            <a class="nav-link" href="#interview">9. 15 Interview Q&A</a>
+            <a class="nav-link" href="#mcq">10. 10 MCQs</a>
+            <a class="nav-link" href="#short-answer">11. Short Answers</a>
+            <a class="nav-link" href="#exercises">12. Coding Exercises</a>
+            <a class="nav-link" href="#projects">13. Mini Projects</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            
+            <h1 class="display-4 fw-bold mb-3">Bootstrap Content Elements</h1>
+            <p class="lead text-muted mb-5">Master styling text, images, tables, and standard HTML content elements with Bootstrap 5 utility classes.</p>
+
+            <!-- SECTION 1: TYPOGRAPHY -->
+            <section id="typography">
+                <h2 class="custom-heading">1. Typography</h2>
+                <p>Bootstrap styles standard HTML headings (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>) by default. You can also use the classes <code>.h1</code> through <code>.h6</code> on non-heading elements to match the styling.</p>
+                
+                <div class="demo-container">
+                    <h1>h1. Bootstrap heading</h1>
+                    <h2>h2. Bootstrap heading</h2>
+                    <h3>h3. Bootstrap heading</h3>
+                    <p class="h4">p.h4. Paragraph styled as heading 4</p>
+                    
+                    <hr>
+                    <p>You can use the <code>&lt;mark&gt;</code> tag to <mark>highlight</mark> text.</p>
+                    <p><del>This line of text is meant to be treated as deleted text.</del></p>
+                    <p><u>This line of text will render as underlined.</u></p>
+                    <p class="small">This line of text is meant to be treated as fine print using the <code>.small</code> class.</p>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;h1&gt;Standard Heading&lt;/h1&gt;
+&lt;p class="h1"&gt;Paragraph styled as an H1&lt;/p&gt;
+&lt;p&gt;Highlighted &lt;mark&gt;text&lt;/mark&gt;&lt;/p&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 2: DISPLAY HEADINGS -->
+            <section id="display">
+                <h2 class="custom-heading">2. Display Headings</h2>
+                <p>Traditional heading elements are designed to work best in the meat of your page content. When you need a heading to stand out (e.g., hero sections), consider using a <strong>display heading</strong>—a larger, slightly more opinionated heading style.</p>
+                
+                <div class="demo-container">
+                    <h1 class="display-1">Display 1</h1>
+                    <h1 class="display-4">Display 4</h1>
+                    <h1 class="display-6">Display 6</h1>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;h1 class="display-1"&gt;Massive Header&lt;/h1&gt;
+&lt;h1 class="display-6"&gt;Smaller Display Header&lt;/h1&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 3: LEAD TEXT -->
+            <section id="lead">
+                <h2 class="custom-heading">3. Lead Text</h2>
+                <p>Make a paragraph stand out by adding <code>.lead</code>. This is typically used for the first paragraph of a blog post or introductory text in a hero banner.</p>
+                
+                <div class="demo-container">
+                    <p class="lead">
+                        This is a lead paragraph. It stands out from regular paragraphs.
+                    </p>
+                    <p>
+                        This is a regular paragraph. It has standard font size and weight.
+                    </p>
+                </div>
+
+<pre><code class="language-html">&lt;p class="lead"&gt;Important introductory text.&lt;/p&gt;</code></pre>
+            </section>
+
+            <!-- SECTION 4: LISTS -->
+            <section id="lists">
+                <h2 class="custom-heading">4. Lists</h2>
+                <p>Bootstrap offers utility classes for styling unstyled lists, inline lists, and aligning description lists.</p>
+                
+                <div class="demo-container">
+                    <h5>Unstyled List</h5>
+                    <ul class="list-unstyled">
+                        <li>This is a list.</li>
+                        <li>It appears completely unstyled.</li>
+                        <li>Structurally, it's still a list.</li>
+                    </ul>
+                    
+                    <hr>
+                    <h5>Inline List</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">Item 1</li>
+                        <li class="list-inline-item">Item 2</li>
+                        <li class="list-inline-item">Item 3</li>
+                    </ul>
+
+                    <hr>
+                    <h5>Description List Alignment</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">Description lists</dt>
+                        <dd class="col-sm-9">A description list is perfect for defining terms.</dd>
+                        
+                        <dt class="col-sm-3">Term</dt>
+                        <dd class="col-sm-9">Definition for the term.</dd>
+                    </dl>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Inline List --&gt;
+&lt;ul class="list-inline"&gt;
+  &lt;li class="list-inline-item"&gt;Home&lt;/li&gt;
+  &lt;li class="list-inline-item"&gt;About&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Grid based description list --&gt;
+&lt;dl class="row"&gt;
+  &lt;dt class="col-sm-3"&gt;Term&lt;/dt&gt;
+  &lt;dd class="col-sm-9"&gt;Definition&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 5: BLOCKQUOTES -->
+            <section id="blockquotes">
+                <h2 class="custom-heading">5. Blockquotes</h2>
+                <p>Use <code>.blockquote</code> to style standard HTML blockquotes. You can also add a <code>.blockquote-footer</code> for attribution.</p>
+                
+                <div class="demo-container">
+                    <figure>
+                        <blockquote class="blockquote">
+                            <p>A well-known quote, contained in a blockquote element.</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            Someone famous in <cite title="Source Title">Source Title</cite>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="text-center mt-4">
+                        <blockquote class="blockquote">
+                            <p>This quote is centered using standard text utilities.</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            Center Aligned
+                        </figcaption>
+                    </figure>
+                </div>
+
+<pre><code class="language-html">&lt;figure&gt;
+  &lt;blockquote class="blockquote"&gt;
+    &lt;p&gt;A well-known quote.&lt;/p&gt;
+  &lt;/blockquote&gt;
+  &lt;figcaption class="blockquote-footer"&gt;
+    Author in &lt;cite&gt;Source Title&lt;/cite&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+            </section>
+
+
+            <!-- SECTION 6: IMAGES -->
+            <section id="images">
+                <h2 class="custom-heading">6. Images</h2>
+                <p>Images in Bootstrap are made responsive with <code>.img-fluid</code>, which applies <code>max-width: 100%; height: auto;</code> so the image scales with the parent element.</p>
+                
+                <div class="demo-container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Fluid Image</h5>
+                            <img src="https://picsum.photos/400/250?random=1" class="img-fluid" alt="Responsive image">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Image Thumbnail</h5>
+                            <img src="https://picsum.photos/400/250?random=2" class="img-thumbnail" alt="Thumbnail image">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Rounded Image</h5>
+                            <img src="https://picsum.photos/400/250?random=3" class="img-fluid rounded" alt="Rounded image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;!-- Responsive Image --&gt;
+&lt;img src="..." class="img-fluid" alt="..."&gt;
+
+&lt;!-- Image with thumbnail border --&gt;
+&lt;img src="..." class="img-thumbnail" alt="..."&gt;</code></pre>
+                </div>
+            </section>
+
+
+            <!-- SECTION 7: FIGURES -->
+            <section id="figures">
+                <h2 class="custom-heading">7. Figures</h2>
+                <p>Use the <code>&lt;figure&gt;</code> tag to display related images and text. Use the classes <code>.figure</code>, <code>.figure-img</code>, and <code>.figure-caption</code> to provide baseline styles.</p>
+                
+                <div class="demo-container text-center">
+                    <figure class="figure">
+                        <img src="https://picsum.photos/500/300?random=4" class="figure-img img-fluid rounded" alt="A random image">
+                        <figcaption class="figure-caption text-end">A caption for the above image.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;figure class="figure"&gt;
+  &lt;img src="..." class="figure-img img-fluid rounded" alt="..."&gt;
+  &lt;figcaption class="figure-caption"&gt;A caption for the image.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 8: TABLES -->
+            <section id="tables">
+                <h2 class="custom-heading">8. Tables</h2>
+                <p>Add the base class <code>.table</code> to any <code>&lt;table&gt;</code>. Add modifiers like <code>.table-striped</code>, <code>.table-hover</code>, and <code>.table-bordered</code> for different styles.</p>
+                
+                <div class="demo-container">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>Admin</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>Editor</td>
+                                </tr>
+                                <tr class="table-success">
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>Subscriber (Success row)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="explanation">
+                    <strong>Responsive Tables:</strong> Wrapping your <code>&lt;table&gt;</code> inside a <code>&lt;div class="table-responsive"&gt;</code> ensures it scrolls horizontally on smaller screens.
+                </div>
+
+                <div class="code-block">
+<pre><code class="language-html">&lt;div class="table-responsive"&gt;
+  &lt;table class="table table-striped table-hover"&gt;
+    &lt;thead class="table-dark"&gt;
+      &lt;tr&gt;&lt;th&gt;...&lt;/th&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION 9: INTERVIEW Q&A -->
+            <section id="interview">
+                <h2 class="custom-heading">9. 15 Interview Questions with Answers</h2>
+                <div class="accordion" id="accordionInterview">
+                    <script>
+                        const questions = [
+                            {q: "What is the primary class used to make an image responsive in Bootstrap?", a: "The .img-fluid class. It applies max-width: 100% and height: auto to the image."},
+                            {q: "How do you turn a regular HTML paragraph into a heading-styled text without changing the tag?", a: "By applying heading classes like .h1, .h2, .h3, etc. to the paragraph tag."},
+                            {q: "What is the difference between standard headings and display headings?", a: "Display headings (.display-1 to .display-6) are larger, bolder, and typically used for hero sections or prominent page headers, whereas standard headings are for document structure."},
+                            {q: "How do you create a table that has alternating row colors?", a: "Add the .table-striped class to the table element."},
+                            {q: "What class makes a table row highlight when you mouse over it?", a: ".table-hover"},
+                            {q: "Why should you wrap a table in a div with the class .table-responsive?", a: "It creates a horizontal scrollbar on small screens to prevent the table from breaking the layout or squishing the content."},
+                            {q: "How do you remove default margins and bullets from a list?", a: "Use the .list-unstyled class on the ul or ol element."},
+                            {q: "How do you align list items horizontally instead of vertically?", a: "Use .list-inline on the parent ul/ol and .list-inline-item on the child li elements."},
+                            {q: "What is the purpose of the .lead class?", a: "It makes a paragraph stand out by increasing its font size and font weight, often used for introductory text."},
+                            {q: "How do you structure a blockquote properly in Bootstrap 5?", a: "Wrap it in a <figure> tag, use <blockquote class='blockquote'> for the quote, and <figcaption class='blockquote-footer'> for the attribution."},
+                            {q: "Can you change the color of a specific table row?", a: "Yes, by adding contextual classes like .table-success, .table-danger, or .table-primary directly to the <tr> tag."},
+                            {q: "What does the .img-thumbnail class do?", a: "It gives an image a rounded 1px border with a slight padding and background color to look like a photograph thumbnail."},
+                            {q: "How do you make the table header dark?", a: "Apply the .table-dark class directly to the <thead> element."},
+                            {q: "How do you align description lists horizontally?", a: "Use the grid classes (.row on the <dl>, and column classes like .col-sm-3 / .col-sm-9 on the <dt> and <dd> elements)."},
+                            {q: "What is the .figure-caption class used for?", a: "It provides proper styling (gray color, specific font size) for the text describing a <figure> element."}
+                        ];
+                        
+                        document.write(questions.map((item, index) => `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                                        Q${index + 1}: ${item.q}
+                                    </button>
+                                </h2>
+                                <div id="collapse${index}" class="accordion-collapse collapse" data-bs-parent="#accordionInterview">
+                                    <div class="accordion-body">${item.a}</div>
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 10: MCQs -->
+            <section id="mcq">
+                <h2 class="custom-heading">10. 10 Multiple Choice Questions (MCQs)</h2>
+                <div id="mcq-container">
+                    <script>
+                        const mcqs = [
+                            {q: "Which class is used to make an image scale with its parent?", opts: ["A) .img-responsive", "B) .img-fluid", "C) .image-scale", "D) .img-auto"], ans: "B"},
+                            {q: "Which class provides the largest display heading?", opts: ["A) .display-6", "B) .h1", "C) .display-1", "D) .lead"], ans: "C"},
+                            {q: "What element should contain the .blockquote-footer class?", opts: ["A) <footer>", "B) <span>", "C) <figcaption>", "D) <small>"], ans: "C"},
+                            {q: "To make a table responsive, the .table-responsive class must be added to:", opts: ["A) The <table> element", "B) A wrapper <div> around the table", "C) The <tbody> element", "D) The <tr> element"], ans: "B"},
+                            {q: "Which class is used to highlight text in Bootstrap?", opts: ["A) No class, use the <mark> tag", "B) .bg-highlight", "C) .text-highlight", "D) .mark-text"], ans: "A"},
+                            {q: "To make list items display inline, which class is added to the <li> tags?", opts: ["A) .inline-item", "B) .list-inline-item", "C) .list-horizontal", "D) .d-inline"], ans: "B"},
+                            {q: "Which class adds borders on all sides of the table and cells?", opts: ["A) .table-grid", "B) .table-borders", "C) .table-bordered", "D) .border-all"], ans: "C"},
+                            {q: "What does the .lead class do?", opts: ["A) Centers text", "B) Makes text italic", "C) Increases text size and weight", "D) Changes text color to blue"], ans: "C"},
+                            {q: "How do you make an image have rounded corners?", opts: ["A) .rounded", "B) .img-rounded", "C) .corner-round", "D) .border-radius"], ans: "A"},
+                            {q: "Which class removes default padding and bullets from a list?", opts: ["A) .list-clear", "B) .list-unstyled", "C) .no-bullets", "D) .list-clean"], ans: "B"}
+                        ];
+                        document.write('<ul class="list-group">');
+                        mcqs.forEach((m, i) => {
+                            document.write(`<li class="list-group-item mb-2 border">
+                                <strong>${i+1}. ${m.q}</strong><br>
+                                <span class="text-muted">${m.opts.join(' &nbsp;&nbsp;|&nbsp;&nbsp; ')}</span><br>
+                                <button class="btn btn-sm btn-outline-primary mt-2" onclick="alert('Answer: ${m.ans}')">Show Answer</button>
+                            </li>`);
+                        });
+                        document.write('</ul>');
+                    </script>
+                </div>
+            </section>
+
+            <!-- SECTION 11: SHORT ANSWER -->
+            <section id="short-answer">
+                <h2 class="custom-heading">11. 5 Short Answer Questions</h2>
+                <ol>
+                    <li class="mb-3">
+                        <strong>Explain the difference between <code>.h1</code> and <code>.display-1</code>.</strong><br>
+                        <em>Answer:</em> <code>.h1</code> mimics the default styling (font size and weight) of a standard HTML <code>&lt;h1&gt;</code> tag. <code>.display-1</code> is a much larger, lighter font-weight class designed for hero sections or highly prominent text.
+                    </li>
+                    <li class="mb-3">
+                        <strong>Why is it recommended to use a <code>&lt;figure&gt;</code> element for blockquotes in Bootstrap 5?</strong><br>
+                        <em>Answer:</em> Using <code>&lt;figure&gt;</code> allows you to semantically group the quote (<code>&lt;blockquote&gt;</code>) and its attribution (<code>&lt;figcaption&gt;</code>) together neatly, and Bootstrap 5's typography utilities are optimized for this structure.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do you combine multiple table classes? Give an example.</strong><br>
+                        <em>Answer:</em> You just add them as a space-separated list inside the class attribute. Example: <code>&lt;table class="table table-striped table-hover table-bordered"&gt;</code>.
+                    </li>
+                    <li class="mb-3">
+                        <strong>What CSS properties does <code>.img-fluid</code> apply?</strong><br>
+                        <em>Answer:</em> It applies <code>max-width: 100%;</code> and <code>height: auto;</code> so the image never overflows its container.
+                    </li>
+                    <li class="mb-3">
+                        <strong>How do you style a description list so the terms and descriptions sit side-by-side?</strong><br>
+                        <em>Answer:</em> By applying grid classes: <code>.row</code> on the <code>&lt;dl&gt;</code>, and column classes like <code>.col-sm-3</code> on the <code>&lt;dt&gt;</code> and <code>.col-sm-9</code> on the <code>&lt;dd&gt;</code>.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- SECTION 12: EXERCISES -->
+            <section id="exercises">
+                <h2 class="custom-heading">12. 5 Coding Exercises</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 1: Display Heading</h5>
+                                <p>Create a header section containing a standard h2, but style it to look like the largest possible display heading.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans1">Solution</button>
+                                <div id="ans1" class="collapse mt-2">
+                                    <code>&lt;h2 class="display-1"&gt;Welcome&lt;/h2&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 2: Inline Footer Links</h5>
+                                <p>Create an unstyled, horizontal list for footer links (Home, Privacy, Contact).</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans2">Solution</button>
+                                <div id="ans2" class="collapse mt-2">
+                                    <pre><code>&lt;ul class="list-inline"&gt;
+  &lt;li class="list-inline-item"&gt;Home&lt;/li&gt;
+  &lt;li class="list-inline-item"&gt;Privacy&lt;/li&gt;
+  &lt;li class="list-inline-item"&gt;Contact&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 3: Hero Image</h5>
+                                <p>Write the image tag for a responsive hero image that has rounded corners.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans3">Solution</button>
+                                <div id="ans3" class="collapse mt-2">
+                                    <code>&lt;img src="hero.jpg" class="img-fluid rounded" alt="Hero"&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 4: Highlighted Text</h5>
+                                <p>Write a paragraph with the lead class, where the word "Bootstrap" is highlighted natively.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans4">Solution</button>
+                                <div id="ans4" class="collapse mt-2">
+                                    <code>&lt;p class="lead"&gt;Learning &lt;mark&gt;Bootstrap&lt;/mark&gt; is fun.&lt;/p&gt;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card border-primary">
+                            <div class="card-body">
+                                <h5>Exercise 5: Basic User Table</h5>
+                                <p>Create a striped, hoverable table with a dark header row containing ID, Name, and Email.</p>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#ans5">Solution</button>
+                                <div id="ans5" class="collapse mt-2">
+                                    <pre><code>&lt;table class="table table-striped table-hover"&gt;
+  &lt;thead class="table-dark"&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;John&lt;/td&gt;&lt;td&gt;j@test.com&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 13: MINI PROJECTS -->
+            <section id="projects">
+                <h2 class="custom-heading">13. 2 Mini Projects</h2>
+                
+                <div class="mb-5">
+                    <h4>Project 1: Author Bio Card</h4>
+                    <p><strong>Goal:</strong> Combine typography, images, and lists to create a sidebar bio.</p>
+                    <ul>
+                        <li>Use an <code>&lt;img&gt;</code> with <code>.img-thumbnail</code> for the profile picture.</li>
+                        <li>Below it, use an <code>&lt;h3&gt;</code> with the author's name.</li>
+                        <li>Use a <code>.lead</code> paragraph for a short intro.</li>
+                        <li>Use an inline list (<code>.list-inline</code>) for social media text links (Twitter, LinkedIn, GitHub) below the intro.</li>
+                        <li>Wrap a favorite quote in a <code>&lt;figure&gt;</code> blockquote structure at the bottom.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Project 2: Data Dashboard View</h4>
+                    <p><strong>Goal:</strong> Build a mock analytics data table.</p>
+                    <ul>
+                        <li>Create a title using <code>.display-6</code> reading "Monthly Traffic".</li>
+                        <li>Wrap a table in a <code>.table-responsive</code> div.</li>
+                        <li>Make the table <code>.table-bordered</code> and <code>.table-hover</code>.</li>
+                        <li>Create columns for Month, Visitors, Bounce Rate, and Status.</li>
+                        <li>Make the 'Status' cell for one row use <code>.table-danger</code> to indicate a drop in traffic, and another use <code>.table-success</code> to indicate an increase.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+        
+        <footer class="text-center text-muted mt-5 mb-3 border-top pt-3">
+            <small>&copy; 2026 Bootstrap Content Masterclass Tutorial</small>
+        </footer>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+</body>
+</html>
